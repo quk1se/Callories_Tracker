@@ -1,0 +1,29 @@
+﻿<Window x:Class="Callories_Tracker.NewDailyTarget"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Callories_Tracker"
+        mc:Ignorable="d"
+        Title="New Daily Target" Height="350" Width="350">
+    <Window.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="set_target_label" Grid.RowSpan="1" Grid.ColumnSpan="4" Grid.Column="0" FontWeight="Bold" FontSize="26" Margin="10" VerticalContentAlignment="Center" Background="FloralWhite" Foreground="DarkOliveGreen" BorderBrush="DarkOliveGreen" BorderThickness="5" HorizontalContentAlignment="Center" >Set new daily target</Label>
+        <TextBox x:Name="new_target_txt" Grid.Row="1" Grid.Column="0" Foreground="DarkOliveGreen" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="4" Margin="10" Background="FloralWhite" BorderBrush="DarkOliveGreen" BorderThickness="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+        <Button x:Name="save_daily_target_btn" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" BorderBrush="DarkOliveGreen" Background="FloralWhite" BorderThickness="5" Foreground="DarkOliveGreen" FontWeight="Bold" FontSize="20" Click="save_daily_target_btn_Click" >Save and exit</Button>
+    </Grid>
+</Window>

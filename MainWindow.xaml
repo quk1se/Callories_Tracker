@@ -1,0 +1,553 @@
+﻿<Window x:Class="Callories_Tracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Callories_Tracker"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="Calories Tracker" Height="800" Width="600" ResizeMode="NoResize">
+    
+    <Window.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
+    </Window.Background>
+
+    <Window.Resources>
+        
+        <Style x:Key="LightDiagramButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="FloralWhite"/>
+            <Setter Property="BorderBrush" Value="DarkOliveGreen"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="DarkOliveGreen"/>
+        </Style>
+        <Style x:Key="LightPanelButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="38"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <Style x:Key="LightPanelRect" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="DarkOliveGreen"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="IsHitTestVisible" Value="false"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="RadiusX" Value="3"/>
+            <Setter Property="RadiusY" Value="3"/>
+            <Setter Property="StrokeThickness" Value="3"/>
+        </Style>
+        <Style x:Key="LightPlusButton" TargetType="Button">
+            <Setter Property="Width" Value="70"></Setter>
+            <Setter Property="Height" Value="70"></Setter>
+            <Setter Property="Background" Value="FloralWhite"></Setter>
+            <Setter Property="BorderThickness" Value="5"></Setter>
+            <Setter Property="BorderBrush" Value="DarkOliveGreen"></Setter>
+            <Setter Property="Foreground" Value="DarkOliveGreen"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+        </Style>
+        <Style x:Key="LightOptionsButton" TargetType="Button">
+            <Setter Property="Background" Value="FloralWhite"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Foreground" Value="DarkOliveGreen"/>
+        </Style>
+        <Style x:Key="LightOptionsRectangle" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="DarkOliveGreen"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="IsHitTestVisible" Value="false"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="RadiusX" Value="3"/>
+            <Setter Property="RadiusY" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="LightAdviceButton" TargetType="Button">
+            <Setter Property="Background" Value="FloralWhite"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Foreground" Value="DarkOliveGreen"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="LightAdviceRect" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="DarkOliveGreen"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Width" Value="85"/>
+            <Setter Property="Height" Value="85"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="IsHitTestVisible" Value="false"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="RadiusX" Value="3"/>
+            <Setter Property="RadiusY" Value="3"/>
+        </Style>
+        <Style x:Key="PolygonLight" TargetType="Polygon">
+            <Setter Property="Stroke" Value="DarkOliveGreen"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Fill" Value="FloralWhite"/>
+        </Style>
+        <Style x:Key="TargetRectLight" TargetType="Rectangle">
+            <Setter Property="Stroke" Value="DarkOliveGreen"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Fill" Value="FloralWhite"/>
+        </Style>
+        <Style x:Key="ProfileRectangleLight" TargetType="Rectangle">
+            <Setter Property="Stroke" Value="DarkOliveGreen"></Setter>
+            <Setter Property="StrokeThickness" Value="7"></Setter>
+        </Style>
+        <Style x:Key="AchievementNotCompletedLight" TargetType="Button">
+            <Setter Property="Background" Value="DarkOliveGreen"></Setter>
+            <Setter Property="BorderBrush" Value="FloralWhite"></Setter>
+            <Setter Property="BorderThickness" Value="5"></Setter>
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Foreground" Value="FloralWhite"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="28"></Setter>
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+        </Style>
+        <Style x:Key="AchievementCompletedLight" TargetType="Button">
+            <Setter Property="Background" Value="FloralWhite"></Setter>
+            <Setter Property="BorderBrush" Value="DarkOliveGreen"></Setter>
+            <Setter Property="BorderThickness" Value="5"></Setter>
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Foreground" Value="DarkOliveGreen"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="28"></Setter>
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+        </Style>
+
+
+
+        <Style x:Key="DarkOptionsBtn" TargetType="Button">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Key="DarkOptionsRect" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Width" Value="400"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="IsHitTestVisible" Value="false"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="RadiusX" Value="3"/>
+            <Setter Property="RadiusY" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="DarkDiagramButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="BorderThickness" Value="5"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Key="DarkPanelButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="38"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <Style x:Key="DarkPanelRect" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="IsHitTestVisible" Value="false"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="RadiusX" Value="3"/>
+            <Setter Property="RadiusY" Value="3"/>
+            <Setter Property="StrokeThickness" Value="3"/>
+        </Style>
+        <Style x:Key="DarkPlusButton" TargetType="Button">
+            <Setter Property="Width" Value="70"></Setter>
+            <Setter Property="Height" Value="70"></Setter>
+            <Setter Property="Background" Value="LightGray"></Setter>
+            <Setter Property="BorderThickness" Value="5"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+        </Style>
+        <Style x:Key="DarkAdviceButton" TargetType="Button">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="DarkAdviceRect" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Width" Value="85"/>
+            <Setter Property="Height" Value="85"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="IsHitTestVisible" Value="false"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="RadiusX" Value="3"/>
+            <Setter Property="RadiusY" Value="3"/>
+        </Style>
+        <Style x:Key="PolygonDark" TargetType="Polygon">
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Fill" Value="LightGray"/>
+        </Style>
+        <Style x:Key="TargetRectDark" TargetType="Rectangle">
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Fill" Value="LightGray"/>
+        </Style>
+        <Style x:Key="ProfileRectangleDark" TargetType="Rectangle">
+            <Setter Property="Stroke" Value="Black"></Setter>
+            <Setter Property="StrokeThickness" Value="7"></Setter>
+        </Style>
+        <Style x:Key="AchievementNotCompletedDark" TargetType="Button">
+            <Setter Property="Background" Value="DimGray"></Setter>
+            <Setter Property="BorderBrush" Value="LightGray"></Setter>
+            <Setter Property="BorderThickness" Value="5"></Setter>
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Foreground" Value="LightGray"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="28"></Setter>
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+        </Style>
+        <Style x:Key="AchievementCompletedDark" TargetType="Button">
+            <Setter Property="Background" Value="LightGray"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="5"></Setter>
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="28"></Setter>
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid x:Name="MainAPPGrid">
+        <Grid x:Name="MainPanelGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="panel_rect" Fill="FloralWhite" Height="50" Grid.ColumnSpan="7" VerticalAlignment="Bottom" Stroke="DarkOliveGreen" StrokeThickness="3"></Rectangle>
+            
+            <Button x:Name="profile_btn" Grid.Column="5" Style="{StaticResource LightPanelButton}" Click="profile_btn_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/panel_avatar_icn.jpg"/>
+                </Button.Background>
+            </Button>
+            <Rectangle x:Name="profile_rect" Grid.Column="5" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
+            
+            <Button x:Name="target_btn" Grid.Column="3" Style="{StaticResource LightPanelButton}" Click="target_btn_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/target.jpg" Stretch="UniformToFill"/>
+                </Button.Background>
+            </Button>
+            <Rectangle x:Name="target_rect" Grid.Column="3" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
+            
+            <Button x:Name="options_btn" Grid.Column="6"  Style="{StaticResource LightPanelButton}" VerticalAlignment="Bottom" Click="options_btn_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/options.jpg"/>
+                </Button.Background>
+            </Button>
+            <Rectangle x:Name="options_rect" Grid.Column="6" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
+            
+            <Button x:Name="daily_advice_btn" Grid.Column="2" Style="{StaticResource LightPanelButton}" Click="daily_advice_btn_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/advice.jpg"/>
+                </Button.Background>
+            </Button>
+            <Rectangle x:Name="daily_advice_rect" Grid.Column="2" Style="{StaticResource LightPanelRect}"></Rectangle>
+            <Button x:Name="achievement_btn" Grid.Column="4" Style="{StaticResource LightPanelButton}" Click="achievement_btn_Click">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/achievement.jpg"/>
+                </Button.Background>
+            </Button>
+            <Rectangle x:Name="achievement_rect" Grid.Column="4" Style="{StaticResource LightPanelRect}"/>
+        </Grid>
+        <Grid x:Name="ProfileGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Image x:Name="your_avatar" Width="180" Height="180" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3" Source="D:/Prog_profile/Callories_Tracker/AppStyle/no_avatar.jpg"></Image>
+            <Rectangle x:Name="avatar_rectangle" Fill="Transparent" Style="{StaticResource ProfileRectangleLight}" Width="190" Height="190" RadiusX="10" RadiusY="10" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+            <Label x:Name="your_name_field" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Grid.ColumnSpan="4" Foreground="Black" FontSize="25" FontWeight="Bold" FontFamily="Verdana" Margin="0,5,0,0">Kalyan Oleksandr</Label>
+            <oxy:PlotView x:Name="WeightDiagram" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="10,10,10,10" Background="FloralWhite" Visibility="Visible"/>
+            <oxy:PlotView x:Name="CircleDiagram" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="10,10,10,10" Background="FloralWhite" Visibility="Hidden"/>
+            <Rectangle x:Name="diagrams_rect" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="7,5,7,5" Fill="Transparent" Style="{StaticResource ProfileRectangleLight}"></Rectangle>
+            <Button x:Name="weight_diagram_btn" Grid.ColumnSpan="2" Grid.Row="7" Style="{StaticResource LightDiagramButtonStyle}" Click="weight_diagram_btn_Click">Weight progress</Button>
+            <Button x:Name="circle_diagram_btn" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" Style="{StaticResource LightDiagramButtonStyle}" Click="circle_diagram_btn_Click">Food components</Button>
+            <Button x:Name="account_statistic_btn" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource LightDiagramButtonStyle}">
+                Your stats
+            </Button>
+        </Grid>
+        <Grid x:Name="TargetGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="target_progress_rect" Grid.Column="1" Grid.ColumnSpan="4" Margin="10"  Style="{StaticResource TargetRectLight}" RadiusX="3" RadiusY="3"></Rectangle>
+            <Label x:Name="target_progress" Grid.Column="1" Grid.ColumnSpan="4" Width="360" HorizontalContentAlignment="Center" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkOliveGreen" FontWeight="Bold" FontFamily="Verdana">0/3000</Label>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="target_triangle" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="0" Y="400"/>
+                        <Point X="200" Y="0"/>
+                        <Point X="400" Y="400"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="first_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="5" Y="396"/>
+                        <Point X="30" Y="350"/>
+                        <Point X="370" Y="350"/>
+                        <Point X="395" Y="396"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="second_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="30" Y="350"/>
+                        <Point X="55" Y="300"/>
+                        <Point X="345" Y="300"/>
+                        <Point X="370" Y="350"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="third_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="55" Y="300"/>
+                        <Point X="80" Y="250"/>
+                        <Point X="320" Y="250"/>
+                        <Point X="345" Y="300"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="fourth_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="80" Y="250"/>
+                        <Point X="105" Y="200"/>
+                        <Point X="295" Y="200"/>
+                        <Point X="320" Y="250"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="fifth_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="105" Y="200"/>
+                        <Point X="130" Y="150"/>
+                        <Point X="270" Y="150"/>
+                        <Point X="295" Y="200"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="six_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="130" Y="150"/>
+                        <Point X="155" Y="100"/>
+                        <Point X="245" Y="100"/>
+                        <Point X="270" Y="150"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="seven_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="155" Y="100"/>
+                        <Point X="180" Y="50"/>
+                        <Point X="220" Y="50"/>
+                        <Point X="245" Y="100"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                <Polygon x:Name="eight_fill" Style="{StaticResource PolygonLight}">
+                    <Polygon.Points>
+                        <Point X="180" Y="50"/>
+                        <Point X="200" Y="8"/>
+                        <Point X="200" Y="8"/>
+                        <Point X="220" Y="50"/>
+                    </Polygon.Points>
+                </Polygon>
+            </Canvas>
+            <Button x:Name="plus_one_btn" Grid.Column="0" Grid.Row="5" Grid.RowSpan="2" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >1</Button>
+            <Button x:Name="plus_two_btn" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >2</Button>
+            <Button x:Name="plus_five_btn" Grid.Column="2" Grid.Row="5" Grid.RowSpan="2" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >5</Button>
+            <Button x:Name="plus_ten_btn" Grid.Column="3" Grid.Row="5" Grid.RowSpan="2" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >10</Button>
+            <Button x:Name="plus_twofive_btn" Grid.Column="4" Grid.Row="5" Grid.RowSpan="2" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >25</Button>
+            <Button x:Name="plus_fifty_btn" Grid.Column="5" Grid.Row="5" Grid.RowSpan="2" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >50</Button>
+            <Button x:Name="plus_one_hundread_btn" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="170" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >100</Button>
+            <Button x:Name="plus_two_hundread_btn" Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="170" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >200</Button>
+            <Button x:Name="plus_five_hundread_btn" Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="170" Style="{StaticResource LightPlusButton}" Click="PlusButton_Click" >500</Button>
+        </Grid>
+        <Grid x:Name="OptionsGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:Name="set_new_target_btn" Style="{StaticResource LightOptionsButton}" Click="set_new_target_btn_Click">Set new daily target</Button>
+            <Rectangle x:Name="set_new_target_rect" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="change_account_data_btn" Grid.Row="1" Style="{StaticResource LightOptionsButton}" Click="change_account_data_btn_Click">Change account data</Button>
+            <Rectangle x:Name="change_account_data_rect" Grid.Row="1" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="notifications_switch_btn" Grid.Row="2" Style="{StaticResource LightOptionsButton}" Click="notifications_switch_btn_Click">Off notifications</Button>
+            <Rectangle x:Name="notifications_switch_rect" Grid.Row="2" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="advice_switch_btn" Grid.Row="3" Style="{StaticResource LightOptionsButton}" Click="advice_switch_btn_Click">Off daily advice</Button>
+            <Rectangle x:Name="advice_switch_rect" Grid.Row="3" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="dark_mode_btn" Grid.Row="4" Style="{StaticResource LightOptionsButton}" Click="dark_mode_btn_Click">Dark mode</Button>
+            <Rectangle x:Name="dark_mode_rect" Grid.Row="4" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="sign_in_btn" Grid.Row="5" Style="{StaticResource LightOptionsButton}">Sign in</Button>
+            <Rectangle x:Name="sign_in_rect" Grid.Row="5" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+        </Grid>
+        <Grid x:Name="DailyAdviceGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="advice_text_rectangle" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2"  Style="{StaticResource TargetRectLight}" RadiusX="10" RadiusY="10"></Rectangle>
+            <FlowDocumentScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="15">
+                <FlowDocument>
+                    <Paragraph x:Name="advice_text" FontSize="24" Foreground="DarkOliveGreen" FontWeight="Bold" FontFamily="Verdana">
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+            <Button x:Name="previous_advice_btn" Style="{StaticResource LightAdviceButton}" Grid.Column="1" Grid.Row="4" Width="80" Height="80" Content="&lt;" Click="previous_advice_btn_Click" ></Button>
+            <Button x:Name="next_advice_btn" Style="{StaticResource LightAdviceButton}" Grid.Column="4" Grid.Row="4" Width="80" Height="80" Content="&gt;" Click="next_advice_btn_Click" ></Button>
+            <Rectangle x:Name="previous_advice_rect" Style="{StaticResource LightAdviceRect}" Grid.Column="1" Grid.Row="4" ></Rectangle>
+            <Rectangle x:Name="next_advice_rect" Style="{StaticResource LightAdviceRect}" Grid.Column="4" Grid.Row="4" ></Rectangle>
+            <Label x:Name="advice_number" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Foreground="DarkOliveGreen" FontSize="50" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center">1/3</Label>
+        </Grid>
+        <Grid x:Name="AchievementsGrid" Visibility="Visible">
+            <ScrollViewer VerticalAlignment="Top" Height="710" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid VerticalAlignment="Top">
+                    <Button x:Name="start_of_a_long_journey" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,0,0,0">Start of a long journey</Button>
+                    <Button x:Name="first_target" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,100,0,0">First target!</Button>
+                    <Button x:Name="streak_of_three" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,200,0,0">Streak of three days</Button>
+                    <Button x:Name="streak_of_five" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,300,0,0">Streak of five days</Button>
+                    <Button x:Name="streak_of_ten" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,400,0,0">Streak of ten days</Button>
+                    <Button x:Name="complete_your_profile" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,500,0,0">Complete your profile</Button>
+                    <Button x:Name="lover_of_motivation" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,600,0,0">Lover of motivation</Button>
+                    <Button x:Name="double_portion" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,700,0,0">Double portion</Button>
+                    <Button x:Name="triple_portion" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,800,0,0">Triple portion</Button>
+                    <Button x:Name="accuracy_to_the_millimeter" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,900,0,0">Accuracy to the millimeter</Button>
+                    <Button x:Name="leave_me_alone" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,1000,0,0">Leave me alone</Button>
+                    <Button x:Name="epilepsy"  Style="{StaticResource AchievementNotCompletedLight}" Margin="0,1100,0,0">???</Button>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
+ 
