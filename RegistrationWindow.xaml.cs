@@ -27,19 +27,16 @@ namespace Callories_Tracker
 
         private void signInBtn_Click(object sender, RoutedEventArgs e)
         {
-            //if (accountMailTextBox.Text == brain.ReadFromFile(brain.file_path) && accountPasswordTextBox.Text == brain.ReadFromFile(brain.pass_path))
-            //{
-            //    this.Hide();
-            //    new MainWindow().ShowDialog();
-            //    this.Close();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Incorrect mail or pass!", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            this.Hide();
-            new MainWindow().ShowDialog();
-            this.Close();
+            if (accountMailTextBox.Text == brain.ReadFromFile(brain.file_path) && accountPasswordTextBox.Text == brain.ReadFromFile(brain.pass_path))
+            {
+                this.Hide();
+                new MainWindow().ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect mail or pass!", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

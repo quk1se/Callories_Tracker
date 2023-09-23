@@ -151,6 +151,7 @@ namespace Callories_Tracker
         }
         public string TakePicturePath()
         {
+            string temp_path = ReadFromFile(picture_path);
             string path = "";
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -165,20 +166,20 @@ namespace Callories_Tracker
                 catch (NotSupportedException)
                 {
                     MessageBox.Show("Error, incorrect image file format!");
-                    path = no_avatar_path;
+                    path = temp_path;
                     return path;
                 }
                 catch (System.IO.FileNotFoundException)
                 {
                     MessageBox.Show("Error, pick the image!");
-                    path = no_avatar_path;
+                    path = temp_path;
                     return path;
                 }
                 
             }
             if (path == "")
             {
-                return no_avatar_path;
+                return temp_path;
             }
             else
                 return path;
