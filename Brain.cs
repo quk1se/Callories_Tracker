@@ -34,6 +34,7 @@ namespace Callories_Tracker
         public float daily_max_target = 3000;
         public float part_of_target;
         public string file_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_name.txt";
+        public string pass_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_pass.txt";
         public string no_avatar_path = "D:\\Prog_profile\\Callories_Tracker\\AppStyle\\no_avatar.jpg";
         public string picture_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_picture.txt";
         public string target_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\daily_target.txt";

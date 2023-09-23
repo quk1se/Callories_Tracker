@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <None Remove="advice.jpg" />
-    <None Remove="background.jpg" />
     <None Remove="no_avatar.jpg" />
     <None Remove="options.jpg" />
     <None Remove="panel_avatar_icn.jpg" />
