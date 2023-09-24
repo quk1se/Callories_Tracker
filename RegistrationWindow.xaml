@@ -21,12 +21,16 @@
            Grid.Row="1" VerticalAlignment="Top" Foreground="DarkOliveGreen" 
            FontSize="42" FontFamily="Verdana" FontWeight="Bold"/>
         <TextBox x:Name="accountMailTextBox" Grid.Row="1" Width="450"
-             Height="60" VerticalAlignment="Bottom" Margin="1 0 0 2"/>
-        <Rectangle Grid.Row="1" Width="457"
+             Height="60" VerticalAlignment="Bottom" Margin="0 0 0 3" 
+                 Foreground="DarkOliveGreen"
+                 FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <Rectangle Grid.Row="1" Width="459"
              Height="67" VerticalAlignment="Bottom" RadiusX="8" RadiusY="8"
                StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
         <TextBox x:Name="accountPasswordTextBox" Grid.Row="2" Width="450"
-             Height="60" VerticalAlignment="Center"/>
+             Height="60" VerticalAlignment="Center"  Foreground="DarkOliveGreen"
+                 FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                 />
         <Rectangle Grid.Row="2" Width="457"
              Height="67" VerticalAlignment="Center" RadiusX="8" RadiusY="8"
              StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>

@@ -27,6 +27,7 @@ namespace Callories_Tracker
     {
         public string[] advice_nums = { "1/3", "2/3", "3/3" };
         public string advice;
+        public bool human_parameters_visible = false;
         public bool notifications_switch = false;
         public bool advice_switch = false;
         public bool dark_mode = false;
@@ -99,13 +100,14 @@ namespace Callories_Tracker
                 };
             }
         }
-        public void GridVisibleChanged(Grid gr1,Grid gr2,Grid gr3, Grid gr4, Grid gr5)
+        public void GridVisibleChanged(Grid gr1,Grid gr2,Grid gr3, Grid gr4, Grid gr5, Grid gr6)
         {
             gr1.Visibility = Visibility.Visible;
             gr2.Visibility = Visibility.Hidden;
             gr3.Visibility = Visibility.Hidden;
             gr4.Visibility = Visibility.Hidden;
             gr5.Visibility = Visibility.Hidden;
+            gr6.Visibility = Visibility.Hidden;
         }
         public bool NotificationsSwitch()
         {

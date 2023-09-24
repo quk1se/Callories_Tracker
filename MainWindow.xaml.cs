@@ -56,7 +56,7 @@ namespace Callories_Tracker
             brain.panel_rectangle_list = new List<Rectangle> { achievement_rect, profile_rect, target_rect, daily_advice_rect, options_rect };
             brain.options_buttons_list = new List<Button> { set_new_target_btn, change_account_data_btn, notifications_switch_btn, advice_switch_btn, dark_mode_btn, sign_in_btn };
             brain.options_rectangle_list = new List<Rectangle> { set_new_target_rect, change_account_data_rect, notifications_switch_rect, advice_switch_rect, dark_mode_rect, sign_in_rect };
-            brain.profile_buttons_list = new List<Button> { weight_diagram_btn, circle_diagram_btn, account_statistic_btn };
+            brain.profile_buttons_list = new List<Button> { weight_diagram_btn, circle_diagram_btn, account_parameters_btn };
             brain.profile_rectangle_list = new List<Rectangle> { avatar_rectangle, diagrams_rect };
             TakeAdvices();
             picture_path = brain.ReadFromFile(brain.picture_path);
@@ -131,26 +131,38 @@ namespace Callories_Tracker
 
         private void weight_diagram_btn_Click(object sender, RoutedEventArgs e)
         {
+            HumanParametersGrid.Visibility = Visibility.Hidden;
             CircleDiagram.Visibility = Visibility.Hidden;
             WeightDiagram.Visibility = Visibility.Visible;
+            brain.human_parameters_visible = false;
         }
 
         private void circle_diagram_btn_Click(object sender, RoutedEventArgs e)
         {
+            HumanParametersGrid.Visibility = Visibility.Hidden;
             WeightDiagram.Visibility = Visibility.Hidden;
             CircleDiagram.Visibility = Visibility.Visible;
+            brain.human_parameters_visible = false;
+        }
+        private void account_parameters_btn_Click(object sender, RoutedEventArgs e)
+        {
+            CircleDiagram.Visibility = Visibility.Hidden;
+            WeightDiagram.Visibility = Visibility.Hidden;
+            HumanParametersGrid.Visibility = Visibility.Visible;
+            brain.human_parameters_visible = true;
         }
 
         private void profile_btn_Click(object sender, RoutedEventArgs e)
         {
-            brain.GridVisibleChanged(ProfileGrid,OptionsGrid,TargetGrid, DailyAdviceGrid, AchievementsGrid);
+            brain.GridVisibleChanged(ProfileGrid,OptionsGrid,TargetGrid, DailyAdviceGrid, AchievementsGrid, HumanParametersGrid);
+            if (brain.human_parameters_visible == true) HumanParametersGrid.Visibility = Visibility.Visible;
             your_name_field.Content = brain.ReadFromFile(brain.file_path);
             your_avatar.Source = new BitmapImage(new Uri(brain.ReadFromFile(brain.picture_path), UriKind.RelativeOrAbsolute));
             your_avatar.Stretch = Stretch.UniformToFill;
         }
         private void target_btn_Click(object sender, RoutedEventArgs e)
         {
-            brain.GridVisibleChanged(TargetGrid, OptionsGrid, ProfileGrid, DailyAdviceGrid, AchievementsGrid);
+            brain.GridVisibleChanged(TargetGrid, OptionsGrid, ProfileGrid, DailyAdviceGrid, AchievementsGrid, HumanParametersGrid);
             brain.daily_max_target = int.Parse(brain.ReadFromFile(brain.target_path));
             target_progress.Content = $"{brain.target_points}/{brain.daily_max_target}";
             brain.part_of_target = brain.daily_max_target / 8;
@@ -175,11 +187,11 @@ namespace Callories_Tracker
 
         private void options_btn_Click(object sender, RoutedEventArgs e)
         {
-            brain.GridVisibleChanged(OptionsGrid, ProfileGrid, TargetGrid, DailyAdviceGrid,AchievementsGrid);
+            brain.GridVisibleChanged(OptionsGrid, ProfileGrid, TargetGrid, DailyAdviceGrid,AchievementsGrid, HumanParametersGrid);
         }
         private void daily_advice_btn_Click(object sender, RoutedEventArgs e)
         {
-            brain.GridVisibleChanged(DailyAdviceGrid, OptionsGrid, TargetGrid, ProfileGrid, AchievementsGrid);
+            brain.GridVisibleChanged(DailyAdviceGrid, OptionsGrid, TargetGrid, ProfileGrid, AchievementsGrid, HumanParametersGrid);
         }
         private void change_account_data_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -189,7 +201,7 @@ namespace Callories_Tracker
         }
         private void achievement_btn_Click(object sender, RoutedEventArgs e)
         {
-            brain.GridVisibleChanged(AchievementsGrid, OptionsGrid, TargetGrid, ProfileGrid, DailyAdviceGrid);
+            brain.GridVisibleChanged(AchievementsGrid, OptionsGrid, TargetGrid, ProfileGrid, DailyAdviceGrid, HumanParametersGrid);
         }
 
         private void previous_advice_btn_Click(object sender, RoutedEventArgs e)
@@ -332,6 +344,5 @@ namespace Callories_Tracker
             //==============================ACHIEVEMENT==============================
             brain.CheckAchieveStyle(light_complete_achieve_style, dark_complete_achieve_style, light_not_complete_achieve_style, dark_not_complete_achieve_style);
         }
-
     }
 }
