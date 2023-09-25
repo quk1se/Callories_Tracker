@@ -535,7 +535,7 @@
             <Rectangle x:Name="advice_switch_rect" Grid.Row="3" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
             <Button x:Name="dark_mode_btn" Grid.Row="4" Style="{StaticResource LightOptionsButton}" Click="dark_mode_btn_Click">Dark mode</Button>
             <Rectangle x:Name="dark_mode_rect" Grid.Row="4" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
-            <Button x:Name="sign_in_btn" Grid.Row="5" Style="{StaticResource LightOptionsButton}">Sign in</Button>
+            <Button x:Name="log_out_btn" Grid.Row="5" Style="{StaticResource LightOptionsButton}" Click="log_out_btn_Click">Log out</Button>
             <Rectangle x:Name="sign_in_rect" Grid.Row="5" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
         </Grid>
         <Grid x:Name="DailyAdviceGrid" Visibility="Hidden">

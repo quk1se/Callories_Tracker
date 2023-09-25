@@ -1,0 +1,88 @@
+﻿<Window x:Class="Callories_Tracker.ChangeDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Callories_Tracker"
+        mc:Ignorable="d"
+        Title="Change account data" Height="600" Width="400">
+    <Window.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="ChangeWindowLabels" TargetType="Label">
+            <Setter Property="Foreground" Value="DarkOliveGreen"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="15 0 0 0"/>
+        </Style>
+        
+        <Style x:Key="ChangeWindowTextBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="DarkOliveGreen"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="70"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="your_avatar" Width="100" Height="100" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+               Grid.RowSpan="2" Source="D:/Prog_profile/Callories_Tracker/AppStyle/no_avatar.jpg"/>
+        
+        <Button x:Name="your_avatar_btn" Width="100" Height="100" Grid.Column="1" Grid.ColumnSpan="2" 
+                Grid.Row="0" Grid.RowSpan="2" Background="Transparent" Click="your_avatar_Click"></Button>
+        
+        <Rectangle x:Name="your_avatar_rect" Fill="Transparent" IsHitTestVisible="False" Stroke="DarkOliveGreen"
+                   StrokeThickness="7" Width="110" Height="110" RadiusX="10" RadiusY="10" Grid.Column="1" 
+                   Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2"/>
+        
+        <TextBox x:Name="NameTextBlock" Width="350" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 Background="FloralWhite" BorderBrush="DarkOliveGreen" BorderThickness="5" Grid.Column="0" Grid.Row="2"
+                 Grid.ColumnSpan="4" Foreground="DarkOliveGreen" FontSize="20" FontWeight="Bold" FontFamily="Verdana"
+                 VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0">Kalyan Oleksandr</TextBox>
+        <Rectangle Fill="FloralWhite" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="5"
+                   Stroke="DarkOliveGreen" StrokeThickness="5"/>
+        <Label Content="Weight" Style="{StaticResource ChangeWindowLabels }" Grid.Row="3" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" />
+        <TextBox Text="68" Style="{StaticResource ChangeWindowTextBox }" Grid.Column="3" 
+            Grid.Row="3" x:Name="parameters_weight"/>
+        <Label Content="Age" Style="{StaticResource ChangeWindowLabels }" Grid.Row="4" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Text="18" Style="{StaticResource ChangeWindowTextBox }" Grid.Column="4" 
+            Grid.Row="4" x:Name="parameters_age"/>
+        <Label Content="Height" Style="{StaticResource ChangeWindowLabels }" Grid.Row="5" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Text="172" Style="{StaticResource ChangeWindowTextBox }" Grid.Column="5" 
+            Grid.Row="5" x:Name="parameters_height"/>
+
+        <Button x:Name="save_account_data" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Background="FloralWhite" 
+                Foreground="DarkOliveGreen" FontSize="18" FontWeight="Bold" FontFamily="Verdana" Width="150" Height="60"
+                Click="save_account_data_Click" > Save and exit</Button>
+        
+        <Rectangle x:Name="save_account_data_rect" Width="160" Height="70"  Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"
+                   StrokeThickness="6" Stroke="DarkOliveGreen" RadiusX="10" RadiusY="10"></Rectangle>
+    </Grid>
+</Window>

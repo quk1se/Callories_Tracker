@@ -54,7 +54,7 @@ namespace Callories_Tracker
             brain.advice_rects_list = new List<Rectangle> { next_advice_rect, previous_advice_rect };
             brain.panel_buttons_list = new List<Button> { achievement_btn, profile_btn, target_btn, daily_advice_btn, options_btn };
             brain.panel_rectangle_list = new List<Rectangle> { achievement_rect, profile_rect, target_rect, daily_advice_rect, options_rect };
-            brain.options_buttons_list = new List<Button> { set_new_target_btn, change_account_data_btn, notifications_switch_btn, advice_switch_btn, dark_mode_btn, sign_in_btn };
+            brain.options_buttons_list = new List<Button> { set_new_target_btn, change_account_data_btn, notifications_switch_btn, advice_switch_btn, dark_mode_btn, log_out_btn };
             brain.options_rectangle_list = new List<Rectangle> { set_new_target_rect, change_account_data_rect, notifications_switch_rect, advice_switch_rect, dark_mode_rect, sign_in_rect };
             brain.profile_buttons_list = new List<Button> { weight_diagram_btn, circle_diagram_btn, account_parameters_btn };
             brain.profile_rectangle_list = new List<Rectangle> { avatar_rectangle, diagrams_rect };
@@ -197,7 +197,9 @@ namespace Callories_Tracker
         {
             ChangeDataWindow changeDataWindow = new ChangeDataWindow();
             if (brain.dark_mode) changeDataWindow.SetBlackMode();
+            this.Hide();
             changeDataWindow.ShowDialog();
+            this.Show();
         }
         private void achievement_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -343,6 +345,15 @@ namespace Callories_Tracker
             brain.CheckProfileStyle(dark_profile_rect_style, light_profile_rect_style, dark_diagram_btn_style, light_diagram_btn_style, WeightDiagram, CircleDiagram);
             //==============================ACHIEVEMENT==============================
             brain.CheckAchieveStyle(light_complete_achieve_style, dark_complete_achieve_style, light_not_complete_achieve_style, dark_not_complete_achieve_style);
+        }
+        private void log_out_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to log out of your account?", "", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+            {
+                this.Hide();
+                new RegistrationWindow().ShowDialog();
+                this.Close();
+            }
         }
     }
 }

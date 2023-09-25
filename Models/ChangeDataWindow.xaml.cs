@@ -27,6 +27,10 @@ namespace Callories_Tracker
         public string my_pict_path_txt;
         public string picture_start_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_picture.txt";
 
+        public string ParamAge { get; set; }
+        public string ParamWeight { get; set; }
+        public string ParamHeight { get; set; }
+
 
         public ChangeDataWindow()
         {
@@ -40,7 +44,19 @@ namespace Callories_Tracker
         {
             your_name_txt = NameTextBlock.Text;
             br.WriteToFile(br.file_path,your_name_txt);
-            Close();
+            if (int.TryParse(parameters_age.Text, out int age) &&
+                int.TryParse(parameters_weight.Text, out int weight) &&
+                int.TryParse(parameters_height.Text, out int height))
+            {
+                br.WriteToFile(br.age_path, age.ToString());
+                br.WriteToFile(br.height_path, height.ToString());
+                br.WriteToFile(br.weight_path, weight.ToString());
+                Close();
+            } 
+            else 
+            { 
+                MessageBox.Show("Please, enter valid data", "Data error",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void your_avatar_Click(object sender, RoutedEventArgs e)
