@@ -18,12 +18,13 @@ using System.Windows.Shapes;
 using OxyPlot;
 using OxyPlot.Series;
 using System.Windows.Threading;
-
+using Callories_Tracker.Data;
 
 namespace Callories_Tracker
 {
     public partial class MainWindow : Window
     {
+        private DataContext dataContext;
         Brain brain = new Brain();
         public string[] advice;
         public string picture_path;
@@ -39,6 +40,10 @@ namespace Callories_Tracker
         public MainWindow()
         {
             InitializeComponent();
+            dataContext = new();
+
+
+
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += Timer_Tick;
@@ -106,6 +111,13 @@ namespace Callories_Tracker
             circle_model.Series.Add(pieSeries);
 
             CircleDiagram.Model = circle_model;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(dataContext
+                .Accounts
+                .Where(account => account.Mail == "alexandrkalyan953@gmail.com").Count().ToString());
         }
         private void Timer_Tick(object sender, EventArgs e)
         {

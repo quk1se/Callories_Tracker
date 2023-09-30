@@ -10,34 +10,94 @@
         <ImageBrush ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
     </Window.Background>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Grid x:Name="signInGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Label Content="Login" HorizontalAlignment="Center"
-           Grid.Row="1" VerticalAlignment="Top" Foreground="DarkOliveGreen" 
-           FontSize="42" FontFamily="Verdana" FontWeight="Bold"/>
-        <TextBox x:Name="accountMailTextBox" Grid.Row="1" Width="450"
-             Height="60" VerticalAlignment="Bottom" Margin="0 0 0 3" 
-                 Foreground="DarkOliveGreen"
-                 FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-        <Rectangle Grid.Row="1" Width="459"
-             Height="67" VerticalAlignment="Bottom" RadiusX="8" RadiusY="8"
-               StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
-        <TextBox x:Name="accountPasswordTextBox" Grid.Row="2" Width="450"
-             Height="60" VerticalAlignment="Center"  Foreground="DarkOliveGreen"
-                 FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                 />
-        <Rectangle Grid.Row="2" Width="457"
-             Height="67" VerticalAlignment="Center" RadiusX="8" RadiusY="8"
-             StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
-        <Button x:Name="signInBtn" Content="Sign in" Grid.Row="3" VerticalAlignment="Top"
-            Width="100" Height="40" BorderBrush="DarkOliveGreen" BorderThickness="5" 
-            Background="FloralWhite" Foreground="DarkOliveGreen" FontWeight="Bold"
-            FontSize="18" Click="signInBtn_Click"/>
+            <Label Content="Login" HorizontalAlignment="Center"
+       Grid.Row="1" VerticalAlignment="Top" Foreground="DarkOliveGreen" 
+       FontSize="42" FontFamily="Verdana" FontWeight="Bold"/>
+            <TextBox x:Name="accountMailTextBox" Grid.Row="1" Width="450"
+         Height="60" VerticalAlignment="Bottom" Margin="0 0 0 3" 
+             Foreground="DarkOliveGreen"
+             FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Rectangle Grid.Row="1" Width="459"
+         Height="67" VerticalAlignment="Bottom" RadiusX="8" RadiusY="8"
+           StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
+            <TextBox x:Name="accountPasswordTextBox" Grid.Row="2" Width="450"
+         Height="60" VerticalAlignment="Center"  Foreground="DarkOliveGreen"
+             FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+             />
+            <Rectangle Grid.Row="2" Width="457"
+         Height="67" VerticalAlignment="Center" RadiusX="8" RadiusY="8"
+         StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
+            <Button x:Name="signInBtn" Content="Sign in" Grid.Row="3" VerticalAlignment="Top"
+        Width="100" Height="40" BorderBrush="DarkOliveGreen" BorderThickness="5" 
+        Background="FloralWhite" Foreground="DarkOliveGreen" FontWeight="Bold"
+        FontSize="18" Click="signInBtn_Click"/>
+            <Label Grid.Row="3" VerticalAlignment="Center" Content="Don't have an account?" HorizontalContentAlignment="Center"
+           Foreground="DarkOliveGreen" FontSize="18" FontFamily="Verdana" FontWeight="Bold" Margin="0 70 0 0"/>
+            <Button x:Name="signUpBtn" Grid.Row="3" VerticalAlignment="Bottom" Content="Sign up" Foreground="DarkOliveGreen" 
+           FontSize="18" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" 
+            Width="80" Margin="0 0 0 15" MouseEnter="signUpBtn_MouseEnter" MouseLeave="signUpBtn_MouseLeave"
+                    Click="signUpBtn_Click"/>
+        </Grid>
+        <Grid x:Name="signUpGrid" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Registration" HorizontalAlignment="Center"
+            Grid.Row="0" VerticalAlignment="Bottom" Foreground="DarkOliveGreen" 
+            FontSize="42" FontFamily="Verdana" FontWeight="Bold"/>
+            <Label x:Name="mailLabel" Content="E-Mail*" Grid.Row="1" Foreground="DarkOliveGreen" 
+                 FontSize="24" FontFamily="Verdana" FontWeight="Bold" VerticalAlignment="Center" 
+                   Margin="80 0 0 100"/>
+            <TextBox x:Name="accountNewMailTextBox" Grid.Row="1" Width="450"
+              Height="60" VerticalAlignment="Center" Margin="0 0 0 3" 
+                  Foreground="DarkOliveGreen"
+                  FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                     TextChanged="accountNewMailTextBox_TextChanged"/>
+            <Rectangle x:Name="mailRect" Grid.Row="1" Width="459"
+                Height="67" VerticalAlignment="Center" RadiusX="8" RadiusY="8"
+                StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
+            <Label Content="Password*" Grid.Row="1" Foreground="DarkOliveGreen" 
+                FontSize="24" FontFamily="Verdana" FontWeight="Bold" VerticalAlignment="Bottom" 
+                Margin="80 0 0 0"/>
+            <TextBox x:Name="accountNewPasswordTextBox" Grid.Row="2" Width="450"
+              Height="60" VerticalAlignment="Top"  Foreground="DarkOliveGreen"
+                  FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                  Margin="0 2 0 0"/>
+            <Rectangle Grid.Row="2" Width="457"
+                     Height="67" VerticalAlignment="Top" RadiusX="8" RadiusY="8"
+                     StrokeThickness="6" Stroke="DarkOliveGreen" IsHitTestVisible="False"/>
+            <Label Content="Name*" Grid.Row="2" Foreground="DarkOliveGreen" 
+                FontSize="24" FontFamily="Verdana" FontWeight="Bold" VerticalAlignment="Center" 
+                Margin="80 30 0 0"/>
+            <TextBox x:Name="accountNewNameTextBox" Grid.Row="2" Width="450"
+                Height="60" VerticalAlignment="Bottom"  Foreground="DarkOliveGreen"
+                FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                     Margin="0 0 0 3"/>
+            <Rectangle Grid.Row="2" Width="457"
+                Height="67" VerticalAlignment="Bottom" RadiusX="8" RadiusY="8"
+                StrokeThickness="6" Stroke="DarkOliveGreen" IsHitTestVisible="False"/>
+            <Button x:Name="signUpRegistrationBtn" Content="Sign up" Grid.Row="3" VerticalAlignment="Top"
+             Width="100" Height="40" BorderBrush="DarkOliveGreen" BorderThickness="5" 
+             Background="FloralWhite" Foreground="DarkOliveGreen" FontWeight="Bold"
+             FontSize="18" Click="signUpRegistrationBtn_Click" Margin="0 20 0 0"/>
+            <Label Grid.Row="3" VerticalAlignment="Center" Content="Already have an account?" HorizontalContentAlignment="Center"
+        Foreground="DarkOliveGreen" FontSize="18" FontFamily="Verdana" FontWeight="Bold" Margin="0 70 0 0"/>
+            <Button x:Name="signInRegistrationBtn" Grid.Row="3" VerticalAlignment="Bottom" Content="Sign in" Foreground="DarkOliveGreen" 
+        FontSize="18" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" 
+         Width="80" Margin="0 0 0 15" MouseEnter="signInRegistrationBtn_MouseEnter" MouseLeave="signInRegistrationBtn_MouseLeave"
+                    Click="signInRegistrationBtn_Click"/>
+        </Grid>
     </Grid>
-
 </Window>

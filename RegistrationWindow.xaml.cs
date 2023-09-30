@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Callories_Tracker.Data;
+using Callories_Tracker.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,15 +21,19 @@ namespace Callories_Tracker
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        private DataContext dataContext;
         Brain brain = new Brain();
         public RegistrationWindow()
         {
             InitializeComponent();
+            dataContext = new();
         }
 
         private void signInBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (accountMailTextBox.Text == brain.ReadFromFile(brain.file_path) && accountPasswordTextBox.Text == brain.ReadFromFile(brain.pass_path))
+            var account = dataContext.Accounts
+                .FirstOrDefault(acc => acc.Mail == accountMailTextBox.Text && acc.Password == accountPasswordTextBox.Text);
+            if (account != null)
             {
                 this.Hide();
                 new MainWindow().ShowDialog();
@@ -36,6 +42,74 @@ namespace Callories_Tracker
             else
             {
                 MessageBox.Show("Incorrect mail or pass!", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void signUpBtn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            signUpBtn.Foreground = Brushes.White;
+        }
+
+        private void signUpBtn_MouseLeave(object sender, MouseEventArgs e)
+        {
+            signUpBtn.Foreground = Brushes.DarkOliveGreen;
+        }
+
+        private void signUpRegistrationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (accountNewMailTextBox.Text != "" || accountNewPasswordTextBox.Text != "" || accountNewNameTextBox.Text != "" )
+            {
+                Data.Entity.Account account = new Account
+                {
+                    Id = Guid.NewGuid(),
+                    Mail = accountNewMailTextBox.Text,
+                    Password = accountNewPasswordTextBox.Text,
+                    Name = accountNewNameTextBox.Text
+                };
+                dataContext.Accounts.Add(account);
+                dataContext.SaveChanges();
+            }
+        }
+
+        private void signInRegistrationBtn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            signInRegistrationBtn.Foreground = Brushes.White;
+        }
+
+        private void signInRegistrationBtn_MouseLeave(object sender, MouseEventArgs e)
+        {
+            signInRegistrationBtn.Foreground = Brushes.DarkOliveGreen;
+        }
+
+        private void signInRegistrationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            signUpGrid.Visibility = Visibility.Hidden;
+            signInGrid.Visibility = Visibility.Visible;
+        }
+
+        private void signUpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            signUpGrid.Visibility = Visibility.Visible;
+            signInGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void accountNewMailTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var account = dataContext.Accounts
+                .FirstOrDefault(acc => acc.Mail == accountNewMailTextBox.Text);
+            if (account != null)
+            {
+                mailLabel.Foreground = Brushes.DarkRed;
+                signUpRegistrationBtn.IsEnabled = false;
+                mailRect.Stroke = Brushes.DarkRed;
+                signUpRegistrationBtn.Foreground = Brushes.Gray;
+            }
+            else
+            {
+                mailLabel.Foreground = Brushes.DarkOliveGreen;
+                signUpRegistrationBtn.IsEnabled = true;
+                mailRect.Stroke = Brushes.DarkOliveGreen;
+                signUpRegistrationBtn.Foreground = Brushes.DarkOliveGreen;
             }
         }
     }
