@@ -115,9 +115,7 @@ namespace Callories_Tracker
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(dataContext
-                .Accounts
-                .Where(account => account.Mail == "alexandrkalyan953@gmail.com").Count().ToString());
+
         }
         private void Timer_Tick(object sender, EventArgs e)
         {

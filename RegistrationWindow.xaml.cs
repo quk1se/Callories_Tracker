@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,7 +42,7 @@ namespace Callories_Tracker
             }
             else
             {
-                MessageBox.Show("Incorrect mail or pass!", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Incorrect mail or pass!", "Sign in information", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -57,17 +58,45 @@ namespace Callories_Tracker
 
         private void signUpRegistrationBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (accountNewMailTextBox.Text != "" || accountNewPasswordTextBox.Text != "" || accountNewNameTextBox.Text != "" )
+            string emailPattern = @"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b";
+            string passwordPattern = @".{6,}";
+            string namePattern = @"^([^\@]+)";
+            string statsPattern = @"^\d+$";
+            Match match = Regex.Match(accountNewMailTextBox.Text, namePattern);
+            string username = match.Groups[1].Value;
+            if (Regex.IsMatch(accountNewMailTextBox.Text, emailPattern) &&
+                Regex.IsMatch(accountNewPasswordTextBox.Text, passwordPattern) &&
+                Regex.IsMatch(accountNewWeightTextBox.Text, statsPattern) &&
+                Regex.IsMatch(accountNewHeightTextBox.Text, statsPattern) &&
+                Regex.IsMatch(accountNewAgeTextBox.Text, statsPattern))
             {
                 Data.Entity.Account account = new Account
                 {
                     Id = Guid.NewGuid(),
                     Mail = accountNewMailTextBox.Text,
                     Password = accountNewPasswordTextBox.Text,
-                    Name = accountNewNameTextBox.Text
+                    Name = username
+                };
+                Data.Entity.Stat stat = new Stat
+                {
+                    Id = Guid.NewGuid(),
+                    Account_Id = account.Id.ToString(),
+                    Weight = accountNewWeightTextBox.Text,
+                    Height = accountNewHeightTextBox.Text,
+                    Age = accountNewAgeTextBox.Text,
+                    Max_Target = null,
+                    Picture = null
                 };
                 dataContext.Accounts.Add(account);
+                dataContext.Stats.Add(stat);
                 dataContext.SaveChanges();
+                MessageBox.Show("Account successfully created!", "Registration information", MessageBoxButton.OK, MessageBoxImage.Information);
+                signUpGrid.Visibility = Visibility.Hidden;
+                signInGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Enter valid data!", "Registration information", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -102,6 +131,7 @@ namespace Callories_Tracker
                 mailLabel.Foreground = Brushes.DarkRed;
                 signUpRegistrationBtn.IsEnabled = false;
                 mailRect.Stroke = Brushes.DarkRed;
+                accountNewMailTextBox.Foreground = Brushes.DarkRed;
                 signUpRegistrationBtn.Foreground = Brushes.Gray;
             }
             else
@@ -109,6 +139,7 @@ namespace Callories_Tracker
                 mailLabel.Foreground = Brushes.DarkOliveGreen;
                 signUpRegistrationBtn.IsEnabled = true;
                 mailRect.Stroke = Brushes.DarkOliveGreen;
+                accountNewMailTextBox.Foreground = Brushes.DarkOliveGreen;
                 signUpRegistrationBtn.Foreground = Brushes.DarkOliveGreen;
             }
         }
