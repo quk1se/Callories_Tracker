@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,8 +23,9 @@ namespace Callories_Tracker
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        private string username;
         private DataContext dataContext;
-        Brain brain = new Brain();
+        public static string my_id = null!;
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -36,6 +38,14 @@ namespace Callories_Tracker
                 .FirstOrDefault(acc => acc.Mail == accountMailTextBox.Text && acc.Password == accountPasswordTextBox.Text);
             if (account != null)
             {
+                Dispatcher.Invoke(() =>
+                {
+                    my_id = dataContext
+                    .Accounts
+                    .Where(acc => acc.Mail == accountMailTextBox.Text)
+                    .Select(acc => acc.Id)
+                    .FirstOrDefault().ToString();
+                });
                 this.Hide();
                 new MainWindow().ShowDialog();
                 this.Close();
@@ -63,33 +73,15 @@ namespace Callories_Tracker
             string namePattern = @"^([^\@]+)";
             string statsPattern = @"^\d+$";
             Match match = Regex.Match(accountNewMailTextBox.Text, namePattern);
-            string username = match.Groups[1].Value;
+            username = match.Groups[1].Value;
             if (Regex.IsMatch(accountNewMailTextBox.Text, emailPattern) &&
                 Regex.IsMatch(accountNewPasswordTextBox.Text, passwordPattern) &&
                 Regex.IsMatch(accountNewWeightTextBox.Text, statsPattern) &&
                 Regex.IsMatch(accountNewHeightTextBox.Text, statsPattern) &&
                 Regex.IsMatch(accountNewAgeTextBox.Text, statsPattern))
             {
-                Data.Entity.Account account = new Account
-                {
-                    Id = Guid.NewGuid(),
-                    Mail = accountNewMailTextBox.Text,
-                    Password = accountNewPasswordTextBox.Text,
-                    Name = username
-                };
-                Data.Entity.Stat stat = new Stat
-                {
-                    Id = Guid.NewGuid(),
-                    Account_Id = account.Id.ToString(),
-                    Weight = accountNewWeightTextBox.Text,
-                    Height = accountNewHeightTextBox.Text,
-                    Age = accountNewAgeTextBox.Text,
-                    Max_Target = null,
-                    Picture = null
-                };
-                dataContext.Accounts.Add(account);
-                dataContext.Stats.Add(stat);
-                dataContext.SaveChanges();
+                Task task = new Task(AddNewAccount);
+                task.Start();
                 MessageBox.Show("Account successfully created!", "Registration information", MessageBoxButton.OK, MessageBoxImage.Information);
                 signUpGrid.Visibility = Visibility.Hidden;
                 signInGrid.Visibility = Visibility.Visible;
@@ -142,6 +134,33 @@ namespace Callories_Tracker
                 accountNewMailTextBox.Foreground = Brushes.DarkOliveGreen;
                 signUpRegistrationBtn.Foreground = Brushes.DarkOliveGreen;
             }
+        }
+
+        public void AddNewAccount()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Data.Entity.Account account = new Account
+                {
+                    Id = Guid.NewGuid(),
+                    Mail = accountNewMailTextBox.Text,
+                    Password = accountNewPasswordTextBox.Text,
+                    Name = username
+                };
+                Data.Entity.Stat stat = new Stat
+                {
+                    Id = Guid.NewGuid(),
+                    Account_Id = account.Id.ToString(),
+                    Weight = accountNewWeightTextBox.Text,
+                    Height = accountNewHeightTextBox.Text,
+                    Age = accountNewAgeTextBox.Text,
+                    Max_Target = null,
+                    Picture = null
+                };
+                dataContext.Accounts.Add(account);
+                dataContext.Stats.Add(stat);
+                dataContext.SaveChanges();
+            });
         }
     }
 }

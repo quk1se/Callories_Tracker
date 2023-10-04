@@ -37,20 +37,22 @@ namespace Callories_Tracker
             InitializeComponent();
             my_pict_path_txt = br.ReadFromFile(br.picture_path);
             br.SetStartAvatar(my_pict_path_txt, your_avatar);
-            NameTextBlock.Text = br.ReadFromFile(br.file_path);
+            NameTextBlock.Text = Brain.account_name;
+            parameters_age.Text = Brain.account_age;
+            parameters_weight.Text = Brain.account_weight;
+            parameters_height.Text = Brain.account_height;
         }
 
         private void save_account_data_Click(object sender, RoutedEventArgs e)
         {
-            your_name_txt = NameTextBlock.Text;
-            br.WriteToFile(br.file_path,your_name_txt);
+            Brain.account_name = NameTextBlock.Text;
             if (int.TryParse(parameters_age.Text, out int age) &&
                 int.TryParse(parameters_weight.Text, out int weight) &&
                 int.TryParse(parameters_height.Text, out int height))
             {
-                br.WriteToFile(br.age_path, age.ToString());
-                br.WriteToFile(br.height_path, height.ToString());
-                br.WriteToFile(br.weight_path, weight.ToString());
+                Brain.account_age = parameters_age.Text;
+                Brain.account_weight = parameters_weight.Text;
+                Brain.account_height = parameters_height.Text;
                 Close();
             } 
             else 

@@ -25,6 +25,11 @@ namespace Callories_Tracker
 
     class Brain
     {
+        public static string account_name;
+        public static string account_age;
+        public static string account_weight;
+        public static string account_height;
+
         public string[] advice_nums = { "1/3", "2/3", "3/3" };
         public string advice;
         public bool human_parameters_visible = false;
@@ -56,6 +61,7 @@ namespace Callories_Tracker
         public Brain()
         {
             daily_max_target = int.Parse(ReadFromFile(target_path));
+            
         }
 
         public async Task<string[]> GetMotivationalQuotesAsync()

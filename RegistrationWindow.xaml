@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Callories_Tracker"
         mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
         Title="RegistrationWindow" Height="800" Width="600">
     <Window.Background>
         <ImageBrush ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
     </Window.Background>
     <Grid>
-        <Grid x:Name="signInGrid" Visibility="Hidden">
+        <Grid x:Name="signInGrid" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -22,13 +24,13 @@
        Grid.Row="1" VerticalAlignment="Top" Foreground="DarkOliveGreen" 
        FontSize="42" FontFamily="Verdana" FontWeight="Bold"/>
             <TextBox x:Name="accountMailTextBox" Grid.Row="1" Width="450"
-         Height="60" VerticalAlignment="Bottom" Margin="0 0 0 3" 
+         Height="60" VerticalAlignment="Bottom" Margin="0 0 0 3" Text="alexandrkalyan009@gmail.com"
              Foreground="DarkOliveGreen"
              FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Rectangle Grid.Row="1" Width="459"
          Height="67" VerticalAlignment="Bottom" RadiusX="8" RadiusY="8"
            StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
-            <TextBox x:Name="accountPasswordTextBox" Grid.Row="2" Width="450"
+            <TextBox x:Name="accountPasswordTextBox" Grid.Row="2" Width="450" Text="123456"
          Height="60" VerticalAlignment="Center"  Foreground="DarkOliveGreen"
              FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
              />
@@ -37,16 +39,15 @@
          StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
             <Button x:Name="signInBtn" Content="Sign in" Grid.Row="3" VerticalAlignment="Top"
         Width="100" Height="40" BorderBrush="DarkOliveGreen" BorderThickness="5" 
-        Background="FloralWhite" Foreground="DarkOliveGreen" FontWeight="Bold"
+        Background="FloralWhite"  FontFamily="Verdana" Foreground="DarkOliveGreen" FontWeight="Bold"
         FontSize="18" Click="signInBtn_Click"/>
             <Label Grid.Row="3" VerticalAlignment="Center" Content="Don't have an account?" HorizontalContentAlignment="Center"
            Foreground="DarkOliveGreen" FontSize="18" FontFamily="Verdana" FontWeight="Bold" Margin="0 70 0 0"/>
             <Button x:Name="signUpBtn" Grid.Row="3" VerticalAlignment="Bottom" Content="Sign up" Foreground="DarkOliveGreen" 
            FontSize="18" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" 
-            Width="80" Margin="0 0 0 15" MouseEnter="signUpBtn_MouseEnter" MouseLeave="signUpBtn_MouseLeave"
-                    Click="signUpBtn_Click"/>
+            Width="80" Margin="0 0 0 15" MouseEnter="signUpBtn_MouseEnter" MouseLeave="signUpBtn_MouseLeave" Click="signUpBtn_Click"/>
         </Grid>
-        <Grid x:Name="signUpGrid" Visibility="Visible">
+        <Grid x:Name="signUpGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>

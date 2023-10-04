@@ -19,6 +19,7 @@ using OxyPlot;
 using OxyPlot.Series;
 using System.Windows.Threading;
 using Callories_Tracker.Data;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Callories_Tracker
 {
@@ -41,12 +42,13 @@ namespace Callories_Tracker
         {
             InitializeComponent();
             dataContext = new();
-
+            brain.human_parameters_visible = true;
+            GetUserData();
 
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
-            timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick!;
             brain.achievements = new Dictionary<Button, bool> { { start_of_a_long_journey,false },{ first_target,false },{ streak_of_three,false },
                                                                 { streak_of_five,false }, { streak_of_ten,false },{ complete_your_profile,false },
                                                                 { lover_of_motivation, false }, { double_portion, false }, { triple_portion,false },
@@ -113,10 +115,37 @@ namespace Callories_Tracker
             CircleDiagram.Model = circle_model;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void GetUserData()
         {
+            your_name_field.Content = dataContext
+                .Accounts
+                .Where(acc => acc.Id.ToString() == RegistrationWindow.my_id)
+                .Select(account => account.Name)
+                .FirstOrDefault();
+            parameters_weight.Content = dataContext
+               .Stats
+               .Where(stats => stats.Account_Id == RegistrationWindow.my_id)
+               .Select(account => account.Weight)
+               .FirstOrDefault();
+            parameters_age.Content = dataContext
+               .Stats
+               .Where(stats => stats.Account_Id == RegistrationWindow.my_id)
+               .Select(account => account.Age)
+               .FirstOrDefault();
+            parameters_height.Content = dataContext
+               .Stats
+               .Where(stats => stats.Account_Id == RegistrationWindow.my_id)
+               .Select(account => account.Height)
+               .FirstOrDefault();
 
+            Brain.account_name = your_name_field.Content!.ToString()!;
+            Brain.account_age = parameters_age.Content!.ToString()!;
+            Brain.account_weight = parameters_weight.Content!.ToString()!;
+            Brain.account_height = parameters_height.Content!.ToString()!;
         }
+
+
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (clickCount >= 10)
@@ -166,7 +195,10 @@ namespace Callories_Tracker
         {
             brain.GridVisibleChanged(ProfileGrid,OptionsGrid,TargetGrid, DailyAdviceGrid, AchievementsGrid, HumanParametersGrid);
             if (brain.human_parameters_visible == true) HumanParametersGrid.Visibility = Visibility.Visible;
-            your_name_field.Content = brain.ReadFromFile(brain.file_path);
+            your_name_field.Content = Brain.account_name;
+            parameters_age.Content = Brain.account_age;
+            parameters_weight.Content = Brain.account_weight;
+            parameters_height.Content = Brain.account_height;
             your_avatar.Source = new BitmapImage(new Uri(brain.ReadFromFile(brain.picture_path), UriKind.RelativeOrAbsolute));
             your_avatar.Stretch = Stretch.UniformToFill;
         }
