@@ -35,8 +35,7 @@ namespace Callories_Tracker
         public ChangeDataWindow()
         {
             InitializeComponent();
-            my_pict_path_txt = br.ReadFromFile(br.picture_path);
-            br.SetStartAvatar(my_pict_path_txt, your_avatar);
+            br.SetStartAvatar(Brain.picture_path, your_avatar);
             NameTextBlock.Text = Brain.account_name;
             parameters_age.Text = Brain.account_age;
             parameters_weight.Text = Brain.account_weight;
@@ -53,6 +52,7 @@ namespace Callories_Tracker
                 Brain.account_age = parameters_age.Text;
                 Brain.account_weight = parameters_weight.Text;
                 Brain.account_height = parameters_height.Text;
+                Brain.picture_path = my_pict_path_txt;
                 Close();
             } 
             else 
@@ -63,10 +63,19 @@ namespace Callories_Tracker
 
         private void your_avatar_Click(object sender, RoutedEventArgs e)
         {
+            string temp_path = Brain.picture_path;
             my_pict_path_txt = br.TakePicturePath();
-            your_avatar.Source = new BitmapImage(new Uri(my_pict_path_txt, UriKind.RelativeOrAbsolute));
+            try
+            {
+                your_avatar.Source = new BitmapImage(new Uri(my_pict_path_txt, UriKind.RelativeOrAbsolute));
+            }
+            catch
+            {
+                if (temp_path == null) return;
+                your_avatar.Source = new BitmapImage(new Uri(temp_path, UriKind.RelativeOrAbsolute));
+                my_pict_path_txt = temp_path;
+            }
             your_avatar.Stretch = Stretch.UniformToFill;
-            br.WriteToFile(br.picture_path,my_pict_path_txt);
         }
 
         public void SetBlackMode()

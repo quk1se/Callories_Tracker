@@ -29,14 +29,14 @@ namespace Callories_Tracker
         private void save_daily_target_btn_Click(object sender, RoutedEventArgs e)
         {
             int is_out = 1;
-            try
+            if (int.TryParse(new_target_txt.Text, out int age) && Int32.Parse(new_target_txt.Text) > 7)
             {
-                daily_target = int.Parse(new_target_txt.Text);
+                Brain.daily_max_target = new_target_txt.Text;
                 is_out = 1;
             }
-            catch (FormatException)
+            else
             {
-                MessageBox.Show("Enter new target in numbers only");
+                MessageBox.Show("Enter valid target","Invalid data",MessageBoxButton.OK,MessageBoxImage.Error);
                 is_out = 0;
             }
             if (is_out == 1)

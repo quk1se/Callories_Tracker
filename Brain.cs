@@ -29,6 +29,8 @@ namespace Callories_Tracker
         public static string account_age;
         public static string account_weight;
         public static string account_height;
+        public static string picture_path;
+        public static string daily_max_target;
 
         public string[] advice_nums = { "1/3", "2/3", "3/3" };
         public string advice;
@@ -37,15 +39,8 @@ namespace Callories_Tracker
         public bool advice_switch = false;
         public bool dark_mode = false;
         public float target_points = 0;
-        public float daily_max_target = 3000;
         public float part_of_target;
-        public string file_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_name.txt";
-        public string pass_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_pass.txt";
-        public string age_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_age.txt";
-        public string weight_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_weight.txt";
-        public string height_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_height.txt";
         public string no_avatar_path = "D:\\Prog_profile\\Callories_Tracker\\AppStyle\\no_avatar.jpg";
-        public string picture_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\account_picture.txt";
         public string target_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\daily_target.txt";
         public Dictionary<Button,Boolean> achievements;
         public List<Button> plus_buttons_list;
@@ -60,7 +55,6 @@ namespace Callories_Tracker
         public List<Rectangle> profile_rectangle_list;
         public Brain()
         {
-            daily_max_target = int.Parse(ReadFromFile(target_path));
             
         }
 
@@ -210,7 +204,7 @@ namespace Callories_Tracker
         }
         public void SetPartsTarget()
         {
-            part_of_target = daily_max_target / 8;
+            part_of_target = Int32.Parse(daily_max_target) / 8;
         }
         public void FillRect(Polygon rect)
         {

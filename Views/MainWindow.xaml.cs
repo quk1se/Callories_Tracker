@@ -28,7 +28,6 @@ namespace Callories_Tracker
         private DataContext dataContext;
         Brain brain = new Brain();
         public string[] advice;
-        public string picture_path;
         private int clickCount = 0;
         private DispatcherTimer timer;
        
@@ -66,8 +65,6 @@ namespace Callories_Tracker
             brain.profile_buttons_list = new List<Button> { weight_diagram_btn, circle_diagram_btn, account_parameters_btn };
             brain.profile_rectangle_list = new List<Rectangle> { avatar_rectangle, diagrams_rect };
             TakeAdvices();
-            picture_path = brain.ReadFromFile(brain.picture_path);
-            brain.SetStartAvatar(picture_path,your_avatar);
             brain.SetPartsTarget();
 
 
@@ -138,10 +135,23 @@ namespace Callories_Tracker
                .Select(account => account.Height)
                .FirstOrDefault();
 
+            Brain.picture_path = dataContext
+                .Stats
+                .Where(stats => stats.Account_Id == RegistrationWindow.my_id)
+                .Select(account => account.Picture)
+                .FirstOrDefault()!;
+            Brain.daily_max_target = dataContext
+                .Stats
+                .Where(stats => stats.Account_Id == RegistrationWindow.my_id)
+                .Select(account => account.Max_Target)
+                .FirstOrDefault()!;
+
+            brain.SetStartAvatar(Brain.picture_path, your_avatar);
             Brain.account_name = your_name_field.Content!.ToString()!;
             Brain.account_age = parameters_age.Content!.ToString()!;
             Brain.account_weight = parameters_weight.Content!.ToString()!;
             Brain.account_height = parameters_height.Content!.ToString()!;
+
         }
 
 
@@ -199,15 +209,21 @@ namespace Callories_Tracker
             parameters_age.Content = Brain.account_age;
             parameters_weight.Content = Brain.account_weight;
             parameters_height.Content = Brain.account_height;
-            your_avatar.Source = new BitmapImage(new Uri(brain.ReadFromFile(brain.picture_path), UriKind.RelativeOrAbsolute));
+            try
+            {
+                your_avatar.Source = new BitmapImage(new Uri(Brain.picture_path, UriKind.RelativeOrAbsolute));
+            }
+            catch
+            {
+                your_avatar.Source = new BitmapImage(new Uri(brain.no_avatar_path, UriKind.RelativeOrAbsolute));
+            }
             your_avatar.Stretch = Stretch.UniformToFill;
         }
         private void target_btn_Click(object sender, RoutedEventArgs e)
         {
             brain.GridVisibleChanged(TargetGrid, OptionsGrid, ProfileGrid, DailyAdviceGrid, AchievementsGrid, HumanParametersGrid);
-            brain.daily_max_target = int.Parse(brain.ReadFromFile(brain.target_path));
-            target_progress.Content = $"{brain.target_points}/{brain.daily_max_target}";
-            brain.part_of_target = brain.daily_max_target / 8;
+            target_progress.Content = $"{brain.target_points}/{Brain.daily_max_target}";
+            brain.part_of_target = Int32.Parse(Brain.daily_max_target) / 8;
 
             if (brain.target_points >= brain.part_of_target * 8) brain.FillRect(eight_fill);
             else brain.FillRectWhite(eight_fill);
@@ -304,7 +320,7 @@ namespace Callories_Tracker
             if (sender is System.Windows.Controls.Button button)
             {
                 brain.target_points += int.Parse(button.Content.ToString());
-                target_progress.Content = $"{brain.target_points}/{brain.daily_max_target}";
+                target_progress.Content = $"{brain.target_points}/{Brain.daily_max_target}";
             }
 
             if (brain.target_points >= brain.part_of_target * 8) brain.FillRect(eight_fill);

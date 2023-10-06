@@ -154,7 +154,7 @@ namespace Callories_Tracker
                     Weight = accountNewWeightTextBox.Text,
                     Height = accountNewHeightTextBox.Text,
                     Age = accountNewAgeTextBox.Text,
-                    Max_Target = null,
+                    Max_Target = "3000",
                     Picture = null
                 };
                 dataContext.Accounts.Add(account);
