@@ -573,18 +573,18 @@
         <Grid x:Name="AchievementsGrid" Visibility="Hidden">
             <ScrollViewer VerticalAlignment="Top" Height="710" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid VerticalAlignment="Top">
-                    <Button x:Name="start_of_a_long_journey" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,0,0,0">Start of a long journey</Button>
-                    <Button x:Name="first_target" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,100,0,0">First target!</Button>
-                    <Button x:Name="streak_of_three" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,200,0,0">Streak of three days</Button>
-                    <Button x:Name="streak_of_five" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,300,0,0">Streak of five days</Button>
-                    <Button x:Name="streak_of_ten" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,400,0,0">Streak of ten days</Button>
-                    <Button x:Name="complete_your_profile" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,500,0,0">Complete your profile</Button>
-                    <Button x:Name="lover_of_motivation" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,600,0,0">Lover of motivation</Button>
-                    <Button x:Name="double_portion" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,700,0,0">Double portion</Button>
-                    <Button x:Name="triple_portion" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,800,0,0">Triple portion</Button>
-                    <Button x:Name="accuracy_to_the_millimeter" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,900,0,0">Accuracy to the millimeter</Button>
-                    <Button x:Name="leave_me_alone" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,1000,0,0">Leave me alone</Button>
-                    <Button x:Name="epilepsy"  Style="{StaticResource AchievementNotCompletedLight}" Margin="0,1100,0,0">???</Button>
+                    <Button x:Name="start_of_a_long_journey" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,0,0,0" Click="CheckAchieveInfo">Start of a long journey</Button>
+                    <Button x:Name="first_target" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,100,0,0" Click="CheckAchieveInfo">First target!</Button>
+                    <Button x:Name="streak_of_three" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,200,0,0" Click="CheckAchieveInfo">Streak of three days</Button>
+                    <Button x:Name="streak_of_five" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,300,0,0" Click="CheckAchieveInfo">Streak of five days</Button>
+                    <Button x:Name="streak_of_ten" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,400,0,0" Click="CheckAchieveInfo">Streak of ten days</Button>
+                    <Button x:Name="complete_your_profile" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,500,0,0" Click="CheckAchieveInfo">Complete your profile</Button>
+                    <Button x:Name="lover_of_motivation" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,600,0,0" Click="CheckAchieveInfo">Lover of motivation</Button>
+                    <Button x:Name="double_portion" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,700,0,0" Click="CheckAchieveInfo">Double portion</Button>
+                    <Button x:Name="triple_portion" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,800,0,0" Click="CheckAchieveInfo">Triple portion</Button>
+                    <Button x:Name="accuracy_to_the_millimeter" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,900,0,0" Click="CheckAchieveInfo">Accuracy to the millimeter</Button>
+                    <Button x:Name="leave_me_alone" Style="{StaticResource AchievementNotCompletedLight}" Margin="0,1000,0,0" Click="CheckAchieveInfo">Leave me alone</Button>
+                    <Button x:Name="epilepsy"  Style="{StaticResource AchievementNotCompletedLight}" Margin="0,1100,0,0" Click="CheckAchieveInfo">Epilepsy</Button>
                 </Grid>
             </ScrollViewer>
         </Grid>

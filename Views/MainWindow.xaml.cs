@@ -158,19 +158,20 @@ namespace Callories_Tracker
         {
             if (clickCount >= 10)
             {
+                var achievUpdate = dataContext.Achievements.FirstOrDefault(achiev => achiev.AccountId == RegistrationWindow.my_id);
                 epilepsy.Content = "Epilepsy";
                 if (brain.achievements[epilepsy] == "false" && brain.dark_mode)
                 {
                     Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedDark");
-                    brain.achievements[epilepsy] = "true";
                     epilepsy.Style = dark_complete_achieve_style;
                 }
                 else if (brain.achievements[epilepsy] == "false" && !brain.dark_mode)
                 {
                     Style light_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
-                    brain.achievements[epilepsy] = "true";
                     epilepsy.Style = light_complete_achieve_style;
                 }
+                achievUpdate!.Epilepsy = "true";
+                dataContext.SaveChanges();
                 clickCount = 0;
 
             }
@@ -455,6 +456,37 @@ namespace Callories_Tracker
             Style light_not_complete_achieve_style = (Style)FindResource("AchievementNotCompletedLight");
             Style light_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
             brain.CheckAchieveStyle(light_complete_achieve_style, dark_complete_achieve_style, light_not_complete_achieve_style, dark_not_complete_achieve_style);
+        }
+
+        private void CheckAchieveInfo(object sender, RoutedEventArgs e)
+        {
+            if (brain.achievements[(Button)sender] == "true")
+            {
+                if (sender == start_of_a_long_journey) MessageBox.Show("Register your account in the application and log in to it", start_of_a_long_journey.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == first_target) MessageBox.Show("Complete your first daily quota", first_target.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == streak_of_three) MessageBox.Show("Complete your daily requirement 3 days in a row", streak_of_three.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == streak_of_five) MessageBox.Show("Complete your daily requirement 5 days in a row", streak_of_five.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == streak_of_ten) MessageBox.Show("Complete your daily requirement 10 days in a row", streak_of_ten.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == complete_your_profile) MessageBox.Show("Fill out your profile completely", complete_your_profile.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == lover_of_motivation) MessageBox.Show("Read all the motivations for 5 days", lover_of_motivation.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == double_portion) MessageBox.Show("Exceed the daily norm by 2 times", double_portion.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == triple_portion) MessageBox.Show("Exceed the daily norm by 3 times", triple_portion.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == accuracy_to_the_millimeter) MessageBox.Show("Meet the daily norm exactly without overweights", accuracy_to_the_millimeter.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == leave_me_alone) MessageBox.Show("Keep notifications off for 5 days", leave_me_alone.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (sender == epilepsy) MessageBox.Show("Quickly change between dark and light mode within 5 seconds", epilepsy.Content.ToString(),
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
