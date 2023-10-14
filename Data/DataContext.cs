@@ -11,6 +11,7 @@ namespace Callories_Tracker.Data
     {
         public DbSet<Entity.Account> Accounts { get; set; }
         public DbSet<Entity.Stat> Stats { get; set; }
+        public DbSet<Entity.Achievements> Achievements { get; set; }
 
         public DataContext() : base() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

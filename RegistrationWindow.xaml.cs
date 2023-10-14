@@ -157,7 +157,24 @@ namespace Callories_Tracker
                     Max_Target = "3000",
                     Picture = null
                 };
+                Data.Entity.Achievements achievements = new Achievements
+                {
+                    AccountId = account.Id.ToString(),
+                    StartOfALongJourney = "true",
+                    FirstTarget = "false",
+                    StreakOfThree = "false",
+                    StreakOfFive = "false",
+                    StreakOfTen = "false",
+                    CompleteYourProfile = "false",
+                    LoverOfMotivation = "false",
+                    DoublePortion = "false",
+                    TriplePortion = "false",
+                    AccuracyToTheMillimeter = "false",
+                    LeaveMeAlone = "false",
+                    Epilepsy = "false",
+                };
                 dataContext.Accounts.Add(account);
+                dataContext.Achievements.Add(achievements);
                 dataContext.Stats.Add(stat);
                 dataContext.SaveChanges();
             });

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Callories_Tracker.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,12 @@ namespace Callories_Tracker
     /// </summary>
     public partial class NewDailyTarget : Window
     {
+        private DataContext dataContext;
         Brain br = new Brain();
         public int daily_target;
         public NewDailyTarget()
         {
+            dataContext = new();
             InitializeComponent();
         }
 
@@ -33,6 +36,9 @@ namespace Callories_Tracker
             {
                 Brain.daily_max_target = new_target_txt.Text;
                 is_out = 1;
+                var accountToUpdate = dataContext.Stats.FirstOrDefault(acc => acc.Account_Id == RegistrationWindow.my_id);
+                accountToUpdate!.Max_Target = Brain.daily_max_target;
+                dataContext.SaveChanges();
             }
             else
             {

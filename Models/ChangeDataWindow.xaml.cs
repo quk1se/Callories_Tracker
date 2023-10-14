@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
 using System.Drawing;
+using Callories_Tracker.Data;
 
 namespace Callories_Tracker
 {
@@ -22,6 +23,7 @@ namespace Callories_Tracker
     /// </summary>
     public partial class ChangeDataWindow : Window
     {
+        private DataContext dataContext;
         Brain br = new Brain();
         public string your_name_txt;
         public string my_pict_path_txt;
@@ -35,6 +37,7 @@ namespace Callories_Tracker
         public ChangeDataWindow()
         {
             InitializeComponent();
+            dataContext = new();
             br.SetStartAvatar(Brain.picture_path, your_avatar);
             NameTextBlock.Text = Brain.account_name;
             parameters_age.Text = Brain.account_age;
@@ -53,6 +56,14 @@ namespace Callories_Tracker
                 Brain.account_weight = parameters_weight.Text;
                 Brain.account_height = parameters_height.Text;
                 Brain.picture_path = my_pict_path_txt;
+                var statsToUpdate = dataContext.Stats.FirstOrDefault(stats => stats.Account_Id == RegistrationWindow.my_id);
+                var accountToUpdate = dataContext.Accounts.FirstOrDefault(stats => stats.Id.ToString() == RegistrationWindow.my_id);
+                accountToUpdate!.Name = Brain.account_name;
+                statsToUpdate!.Age = Brain.account_age;
+                statsToUpdate!.Weight = Brain.account_weight;
+                statsToUpdate!.Height = Brain.account_height;
+                statsToUpdate!.Picture = Brain.picture_path;
+                dataContext.SaveChanges();
                 Close();
             } 
             else 

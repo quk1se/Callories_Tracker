@@ -20,6 +20,8 @@ using OxyPlot.Series;
 using System.Windows.Threading;
 using Callories_Tracker.Data;
 using System.Runtime.InteropServices.ComTypes;
+using Microsoft.Identity.Client;
+using System.Collections;
 
 namespace Callories_Tracker
 {
@@ -48,10 +50,7 @@ namespace Callories_Tracker
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += Timer_Tick!;
-            brain.achievements = new Dictionary<Button, bool> { { start_of_a_long_journey,false },{ first_target,false },{ streak_of_three,false },
-                                                                { streak_of_five,false }, { streak_of_ten,false },{ complete_your_profile,false },
-                                                                { lover_of_motivation, false }, { double_portion, false }, { triple_portion,false },
-                                                                { accuracy_to_the_millimeter, false }, { leave_me_alone, false }, { epilepsy, false } };
+           
             brain.plus_buttons_list = new List<Button> {plus_one_btn, plus_two_btn, plus_five_btn, plus_ten_btn, plus_twofive_btn, plus_fifty_btn,
                                                         plus_one_hundread_btn, plus_two_hundread_btn, plus_five_hundread_btn };
             brain.triangle_polygons = new List<Polygon> {target_triangle, first_fill, second_fill, third_fill, fourth_fill, fifth_fill,
@@ -145,13 +144,12 @@ namespace Callories_Tracker
                 .Where(stats => stats.Account_Id == RegistrationWindow.my_id)
                 .Select(account => account.Max_Target)
                 .FirstOrDefault()!;
-
             brain.SetStartAvatar(Brain.picture_path, your_avatar);
             Brain.account_name = your_name_field.Content!.ToString()!;
             Brain.account_age = parameters_age.Content!.ToString()!;
             Brain.account_weight = parameters_weight.Content!.ToString()!;
             Brain.account_height = parameters_height.Content!.ToString()!;
-
+            SetAchievementsButtons();
         }
 
 
@@ -161,16 +159,16 @@ namespace Callories_Tracker
             if (clickCount >= 10)
             {
                 epilepsy.Content = "Epilepsy";
-                if (brain.achievements[epilepsy] == false && brain.dark_mode)
+                if (brain.achievements[epilepsy] == "false" && brain.dark_mode)
                 {
                     Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedDark");
-                    brain.achievements[epilepsy] = true;
+                    brain.achievements[epilepsy] = "true";
                     epilepsy.Style = dark_complete_achieve_style;
                 }
-                else if (brain.achievements[epilepsy] == false && !brain.dark_mode)
+                else if (brain.achievements[epilepsy] == "false" && !brain.dark_mode)
                 {
                     Style light_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
-                    brain.achievements[epilepsy] = true;
+                    brain.achievements[epilepsy] = "true";
                     epilepsy.Style = light_complete_achieve_style;
                 }
                 clickCount = 0;
@@ -412,6 +410,51 @@ namespace Callories_Tracker
                 new RegistrationWindow().ShowDialog();
                 this.Close();
             }
+        }
+        private void SetAchievementsButtons()
+        {
+            brain.achievements = new Dictionary<Button, string> { 
+                { start_of_a_long_journey,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.StartOfALongJourney)
+                .FirstOrDefault()!},
+                { first_target,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.FirstTarget)
+                .FirstOrDefault()! },
+                { streak_of_three,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.StreakOfThree)
+                .FirstOrDefault()! },
+                { streak_of_five,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.StreakOfFive)
+                .FirstOrDefault()! },
+                { streak_of_ten,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.StreakOfTen)
+                .FirstOrDefault()! },
+                { complete_your_profile,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.CompleteYourProfile)
+                .FirstOrDefault()! },
+                { lover_of_motivation, dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.LoverOfMotivation)
+                .FirstOrDefault()! },
+                { double_portion, dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.DoublePortion)
+                .FirstOrDefault()! }, 
+                { triple_portion,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.TriplePortion)
+                .FirstOrDefault()! },
+                { accuracy_to_the_millimeter, dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.AccuracyToTheMillimeter)
+                .FirstOrDefault()! }, 
+                { leave_me_alone, dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.LeaveMeAlone)
+                .FirstOrDefault()! },
+                { epilepsy, dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
+                .Select(ach => ach.Epilepsy)
+                .FirstOrDefault()! } };
+            Style dark_not_complete_achieve_style = (Style)FindResource("AchievementNotCompletedDark");
+            Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedDark");
+            Style light_not_complete_achieve_style = (Style)FindResource("AchievementNotCompletedLight");
+            Style light_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
+            brain.CheckAchieveStyle(light_complete_achieve_style, dark_complete_achieve_style, light_not_complete_achieve_style, dark_not_complete_achieve_style);
         }
     }
 }
