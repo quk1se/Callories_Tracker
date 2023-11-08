@@ -32,7 +32,8 @@ namespace Callories_Tracker
         public string[] advice;
         private int clickCount = 0;
         private DispatcherTimer timer;
-       
+        static DateTime currentTime = DateTime.Now;
+        DateTime targetTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 14, 32, 0);
 
         public async Task TakeAdvices()
         {
@@ -50,7 +51,7 @@ namespace Callories_Tracker
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += Timer_Tick!;
-           
+            timer.Start();
             brain.plus_buttons_list = new List<Button> {plus_one_btn, plus_two_btn, plus_five_btn, plus_ten_btn, plus_twofive_btn, plus_fifty_btn,
                                                         plus_one_hundread_btn, plus_two_hundread_btn, plus_five_hundread_btn };
             brain.triangle_polygons = new List<Polygon> {target_triangle, first_fill, second_fill, third_fill, fourth_fill, fifth_fill,
@@ -63,9 +64,14 @@ namespace Callories_Tracker
             brain.options_rectangle_list = new List<Rectangle> { set_new_target_rect, change_account_data_rect, notifications_switch_rect, advice_switch_rect, dark_mode_rect, sign_in_rect };
             brain.profile_buttons_list = new List<Button> { weight_diagram_btn, circle_diagram_btn, account_parameters_btn };
             brain.profile_rectangle_list = new List<Rectangle> { avatar_rectangle, diagrams_rect };
+            brain.profile_statistic_labels = new List<Label> { live_parameters_label, live_parameters_weight_label, parameters_weight, live_parameters_age_label, parameters_age,
+            live_parameters_height_label, parameters_height };
             TakeAdvices();
             brain.SetPartsTarget();
-
+            var stats = dataContext.Stats.FirstOrDefault(stats => stats.Account_Id == RegistrationWindow.my_id);
+            brain.target_points = Int32.Parse(stats.Target_Points);
+            target_progress.Content = $"{brain.target_points}/{stats.Max_Target}";
+            profile_calories_label.Content = $"Kcal {target_progress.Content}";
 
             var model = new PlotModel { Title = "Weight statistic" };
             var series = new LineSeries
@@ -108,7 +114,6 @@ namespace Callories_Tracker
 
             circle_model.Series.Add(pieSeries);
 
-            CircleDiagram.Model = circle_model;
         }
 
         private void GetUserData()
@@ -160,20 +165,24 @@ namespace Callories_Tracker
             {
                 var achievUpdate = dataContext.Achievements.FirstOrDefault(achiev => achiev.AccountId == RegistrationWindow.my_id);
                 epilepsy.Content = "Epilepsy";
-                if (brain.achievements[epilepsy] == "false" && brain.dark_mode)
+                if (Brain.achievements[epilepsy] == "false" && brain.dark_mode)
                 {
                     Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedDark");
                     epilepsy.Style = dark_complete_achieve_style;
                 }
-                else if (brain.achievements[epilepsy] == "false" && !brain.dark_mode)
+                else if (Brain.achievements[epilepsy] == "false" && !brain.dark_mode)
                 {
                     Style light_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
                     epilepsy.Style = light_complete_achieve_style;
                 }
+                Brain.achievements[epilepsy] = "true";
                 achievUpdate!.Epilepsy = "true";
                 dataContext.SaveChanges();
                 clickCount = 0;
-
+            }
+            if (DateTime.Now == targetTime)
+            {
+                MessageBox.Show("zhopa");
             }
         }
 
@@ -261,6 +270,7 @@ namespace Callories_Tracker
         private void achievement_btn_Click(object sender, RoutedEventArgs e)
         {
             brain.GridVisibleChanged(AchievementsGrid, OptionsGrid, TargetGrid, ProfileGrid, DailyAdviceGrid, HumanParametersGrid);
+            SetAchievementsButtons();
         }
 
         private void previous_advice_btn_Click(object sender, RoutedEventArgs e)
@@ -306,7 +316,6 @@ namespace Callories_Tracker
             if (brain.NotificationsSwitch() == true) notifications_switch_btn.Content = "On notifications";
             else notifications_switch_btn.Content = "Off notifications";
 
-            
         }
 
         private void advice_switch_btn_Click(object sender, RoutedEventArgs e)
@@ -318,8 +327,12 @@ namespace Callories_Tracker
         {
             if (sender is System.Windows.Controls.Button button)
             {
+                var statsToUpdate = dataContext.Stats.FirstOrDefault(stats => stats.Account_Id == RegistrationWindow.my_id);
                 brain.target_points += int.Parse(button.Content.ToString());
                 target_progress.Content = $"{brain.target_points}/{Brain.daily_max_target}";
+                profile_calories_label.Content = $"Kcal {target_progress.Content}";
+                statsToUpdate.Target_Points = brain.target_points.ToString();
+                dataContext.SaveChanges();
             }
 
             if (brain.target_points >= brain.part_of_target * 8) brain.FillRect(eight_fill);
@@ -330,6 +343,24 @@ namespace Callories_Tracker
             if (brain.target_points >= brain.part_of_target * 3) brain.FillRect(third_fill);
             if (brain.target_points >= brain.part_of_target * 2) brain.FillRect(second_fill);
             if (brain.target_points >= brain.part_of_target) brain.FillRect(first_fill);
+
+            var achievUpdate = dataContext.Achievements.FirstOrDefault(achiev => achiev.AccountId == RegistrationWindow.my_id);
+
+            if (brain.target_points >= Int32.Parse(Brain.daily_max_target) && achievUpdate!.FirstTarget == "false" && brain.dark_mode)
+            {
+                Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedDark");
+                first_target.Style = dark_complete_achieve_style;
+                achievUpdate.FirstTarget = "true";
+                Brain.achievements[first_target] = "true";
+            }
+            else if (brain.target_points >= Int32.Parse(Brain.daily_max_target) && achievUpdate!.FirstTarget == "false" && !brain.dark_mode)
+            {
+                Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
+                first_target.Style = dark_complete_achieve_style;
+                achievUpdate.FirstTarget = "true";
+                Brain.achievements[first_target] = "true";
+            }
+            dataContext.SaveChanges();
         }
 
         private void set_new_target_btn_Click(object sender, RoutedEventArgs e)
@@ -399,7 +430,7 @@ namespace Callories_Tracker
             brain.CheckAdviceTextStyle(advice_text_rectangle, dark_target_rect_style, light_target_rect_style,advice_text,advice_number);
             brain.CheckAdviceBtnsAndRectsStyle(light_advice_btn_style,dark_advice_btn_style,light_advice_rect_style,dark_advice_rect_style);
             //==============================PROFILE==============================
-            brain.CheckProfileStyle(dark_profile_rect_style, light_profile_rect_style, dark_diagram_btn_style, light_diagram_btn_style, WeightDiagram, CircleDiagram);
+            brain.CheckProfileStyle(dark_profile_rect_style, light_profile_rect_style, dark_diagram_btn_style, light_diagram_btn_style, WeightDiagram,your_name_field, CircleDiagram, HumanParametersGrid);
             //==============================ACHIEVEMENT==============================
             brain.CheckAchieveStyle(light_complete_achieve_style, dark_complete_achieve_style, light_not_complete_achieve_style, dark_not_complete_achieve_style);
         }
@@ -414,7 +445,7 @@ namespace Callories_Tracker
         }
         private void SetAchievementsButtons()
         {
-            brain.achievements = new Dictionary<Button, string> { 
+            Brain.achievements = new Dictionary<Button, string> { 
                 { start_of_a_long_journey,dataContext.Achievements.Where(acc => acc.AccountId == RegistrationWindow.my_id)
                 .Select(ach => ach.StartOfALongJourney)
                 .FirstOrDefault()!},
@@ -460,7 +491,7 @@ namespace Callories_Tracker
 
         private void CheckAchieveInfo(object sender, RoutedEventArgs e)
         {
-            if (brain.achievements[(Button)sender] == "true")
+            if (Brain.achievements[(Button)sender] == "true")
             {
                 if (sender == start_of_a_long_journey) MessageBox.Show("Register your account in the application and log in to it", start_of_a_long_journey.Content.ToString(),
                     MessageBoxButton.OK, MessageBoxImage.Information);

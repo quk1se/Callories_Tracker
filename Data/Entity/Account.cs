@@ -12,6 +12,6 @@ namespace Callories_Tracker.Data.Entity
         public string Mail { get; set; } = null!;
         public string Password {  get; set; } = null!;
         public string? Name { get; set; }
-
+        public string? ConfirmCode {  get; set; }
     }
 }

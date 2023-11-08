@@ -291,44 +291,42 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Rectangle x:Name="panel_rect" Fill="FloralWhite" Height="50" Grid.ColumnSpan="7" VerticalAlignment="Bottom" Stroke="DarkOliveGreen" StrokeThickness="3"></Rectangle>
             
-            <Button x:Name="profile_btn" Grid.Column="5" Style="{StaticResource LightPanelButton}" Click="profile_btn_Click">
+            <Button x:Name="profile_btn" Grid.Column="2" Style="{StaticResource LightPanelButton}" Click="profile_btn_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/panel_avatar_icn.jpg"/>
                 </Button.Background>
             </Button>
-            <Rectangle x:Name="profile_rect" Grid.Column="5" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
+            <Rectangle x:Name="profile_rect" Grid.Column="2" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
             
-            <Button x:Name="target_btn" Grid.Column="3" Style="{StaticResource LightPanelButton}" Click="target_btn_Click">
+            <Button x:Name="target_btn" Grid.Column="1" Style="{StaticResource LightPanelButton}" Click="target_btn_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/target.jpg" Stretch="UniformToFill"/>
                 </Button.Background>
             </Button>
-            <Rectangle x:Name="target_rect" Grid.Column="3" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
+            <Rectangle x:Name="target_rect" Grid.Column="1" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
             
-            <Button x:Name="options_btn" Grid.Column="6"  Style="{StaticResource LightPanelButton}" VerticalAlignment="Bottom" Click="options_btn_Click">
+            <Button x:Name="options_btn" Grid.Column="4"  Style="{StaticResource LightPanelButton}" VerticalAlignment="Bottom" Click="options_btn_Click">
                 <Button.Background>
                     <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/options.jpg"/>
                 </Button.Background>
             </Button>
-            <Rectangle x:Name="options_rect" Grid.Column="6" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
+            <Rectangle x:Name="options_rect" Grid.Column="4" Style="{StaticResource LightPanelRect}" VerticalAlignment="Bottom"></Rectangle>
             
-            <Button x:Name="daily_advice_btn" Grid.Column="2" Style="{StaticResource LightPanelButton}" Click="daily_advice_btn_Click">
+            <Button x:Name="daily_advice_btn" Grid.Column="0" Style="{StaticResource LightPanelButton}" Click="daily_advice_btn_Click">
                 <Button.Background>
                     <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/advice.jpg"/>
                 </Button.Background>
             </Button>
-            <Rectangle x:Name="daily_advice_rect" Grid.Column="2" Style="{StaticResource LightPanelRect}"></Rectangle>
-            <Button x:Name="achievement_btn" Grid.Column="4" Style="{StaticResource LightPanelButton}" Click="achievement_btn_Click">
+            <Rectangle x:Name="daily_advice_rect" Grid.Column="0" Style="{StaticResource LightPanelRect}"></Rectangle>
+            <Button x:Name="achievement_btn" Grid.Column="3" Style="{StaticResource LightPanelButton}" Click="achievement_btn_Click">
                 <Button.Background>
                     <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/achievement.jpg"/>
                 </Button.Background>
             </Button>
-            <Rectangle x:Name="achievement_rect" Grid.Column="4" Style="{StaticResource LightPanelRect}"/>
+            <Rectangle x:Name="achievement_rect" Grid.Column="3" Style="{StaticResource LightPanelRect}"/>
         </Grid>
         <Grid x:Name="ProfileGrid" Visibility="Visible">
             <Grid.RowDefinitions>
@@ -350,18 +348,29 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="your_avatar" Width="180" Height="180" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3" Source="D:/Prog_profile/Callories_Tracker/AppStyle/no_avatar.jpg"></Image>
-            <Rectangle x:Name="avatar_rectangle" Fill="Transparent" Style="{StaticResource ProfileRectangleLight}" Width="190" Height="190" RadiusX="10" RadiusY="10" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
-            <Label x:Name="your_name_field" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Grid.ColumnSpan="4" Foreground="DarkOliveGreen" FontSize="25" FontWeight="Bold" FontFamily="Verdana" Margin="0,5,0,0">Kalyan Oleksandr</Label>
-            <oxy:PlotView x:Name="WeightDiagram" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="10,10,10,10" Background="FloralWhite" Visibility="Visible"/>
-            <oxy:PlotView x:Name="CircleDiagram" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="10,10,10,10" Background="FloralWhite" Visibility="Hidden"/>
-            <Rectangle x:Name="diagrams_rect" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="7,5,7,5" Fill="Transparent" Style="{StaticResource ProfileRectangleLight}"></Rectangle>
+            <Image x:Name="your_avatar" Width="150" Height="150" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Source="D:/Prog_profile/Callories_Tracker/AppStyle/no_avatar.jpg"></Image>
+            <Rectangle x:Name="avatar_rectangle" Fill="Transparent" Style="{StaticResource ProfileRectangleLight}" Width="160" Height="160" RadiusX="10" RadiusY="10" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <Label x:Name="your_name_field" Grid.Column="2" Grid.Row="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="3" Foreground="DarkOliveGreen" FontSize="25" FontWeight="Bold" 
+                   FontFamily="Verdana" Margin="0,5,0,0">Kalyan Oleksandr</Label>
+
+            <Rectangle Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="5 20 5 20" Fill="FloralWhite" RadiusX="35" RadiusY="35" Stroke="DarkOliveGreen"
+                       StrokeThickness="4"></Rectangle>
+            <Rectangle Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Margin="5 20 5 20" Fill="FloralWhite" RadiusX="35" RadiusY="35" Stroke="DarkOliveGreen"
+                        StrokeThickness="4"></Rectangle>
+            <Label x:Name="profile_calories_label" Grid.Row="1" Grid.Column="2" Content="Kcal 1200/3000" Grid.ColumnSpan="2" Margin="15 30 20 30" Foreground="DarkOliveGreen"
+                   VerticalContentAlignment="Center"  HorizontalContentAlignment="Right" FontFamily="Verdana" FontSize="16" FontWeight="Bold"></Label>
+            <oxy:PlotView x:Name="WeightDiagram" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="5" Margin="10,10,10,10" Background="FloralWhite" Visibility="Visible"/>
+            <!--<oxy:PlotView x:Name="CircleDiagram" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="10,10,10,10" Background="FloralWhite" Visibility="Hidden"/>-->
+            <Label x:Name="CircleDiagram" Content="Coming soon" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="5" Margin="10" Foreground="DarkOliveGreen"
+                   FontSize="42" FontWeight="Bold" FontFamily="Verdana" VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center" Background="FloralWhite" Visibility="Hidden"/>
+            <Rectangle x:Name="diagrams_rect" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="5" Margin="7,5,7,5" Fill="Transparent" Style="{StaticResource ProfileRectangleLight}"></Rectangle>
             <Button x:Name="weight_diagram_btn" Grid.ColumnSpan="2" Grid.Row="7" Style="{StaticResource LightDiagramButtonStyle}" Click="weight_diagram_btn_Click">Weight progress</Button>
             <Button x:Name="circle_diagram_btn" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" Style="{StaticResource LightDiagramButtonStyle}" Click="circle_diagram_btn_Click">Food components</Button>
             <Button x:Name="account_parameters_btn" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource LightDiagramButtonStyle}" Click="account_parameters_btn_Click">Your parameters</Button>
         </Grid>
         <!--===========================================================================================-->
-        <Grid x:Name="HumanParametersGrid" Visibility="Visible" Height="356" Width="555" Margin="0 190 0 0" ShowGridLines="True" Background="FloralWhite">
+        <Grid x:Name="HumanParametersGrid" Visibility="Visible" Height="445" Width="555" Margin="0 100 0 0" ShowGridLines="True" Background="FloralWhite">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="150"/>
@@ -377,20 +386,20 @@
                 <RowDefinition/>
                 
             </Grid.RowDefinitions>
-            <Label Content="Live parameters" Style="{StaticResource ParameterLabel }" 
+            <Label x:Name="live_parameters_label" Content="Live parameters" Style="{StaticResource ParameterLabel }" 
                    HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-            <Label Content="Weight" Style="{StaticResource ParameterLabel }" Grid.Row="1" 
+            <Label x:Name="live_parameters_weight_label" Content="Weight" Style="{StaticResource ParameterLabel }" Grid.Row="1" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" />
             <Label Content="68" Style="{StaticResource ParameterLabel }" Grid.Column="1" 
                    Grid.Row="1" x:Name="parameters_weight"/>
-            <Label Content="Age" Style="{StaticResource ParameterLabel }" Grid.Row="2" 
+            <Label x:Name="live_parameters_age_label" Content="Age" Style="{StaticResource ParameterLabel }" Grid.Row="2" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" />
             <Label Content="18" Style="{StaticResource ParameterLabel }" Grid.Column="1" 
                    Grid.Row="2" x:Name="parameters_age"/>
-            <Label Content="Height" Style="{StaticResource ParameterLabel }" Grid.Row="3" 
+            <Label x:Name="live_parameters_height_label" Content="Height" Style="{StaticResource ParameterLabel }" Grid.Row="3" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Label Content="172" Style="{StaticResource ParameterLabel }" Grid.Column="1" 
-                   Grid.Row="3" x:Name="parameters_height"/>
+            <Label x:Name="parameters_height" Content="172" Style="{StaticResource ParameterLabel }" Grid.Column="1" 
+                   Grid.Row="3"/>
 
         </Grid>
         
@@ -522,21 +531,19 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Button x:Name="set_new_target_btn" Style="{StaticResource LightOptionsButton}" Click="set_new_target_btn_Click">Set new daily target</Button>
             <Rectangle x:Name="set_new_target_rect" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
             <Button x:Name="change_account_data_btn" Grid.Row="1" Style="{StaticResource LightOptionsButton}" Click="change_account_data_btn_Click">Change account data</Button>
             <Rectangle x:Name="change_account_data_rect" Grid.Row="1" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
-            <Button x:Name="notifications_switch_btn" Grid.Row="2" Style="{StaticResource LightOptionsButton}" Click="notifications_switch_btn_Click">Off notifications</Button>
-            <Rectangle x:Name="notifications_switch_rect" Grid.Row="2" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
-            <Button x:Name="advice_switch_btn" Grid.Row="3" Style="{StaticResource LightOptionsButton}" Click="advice_switch_btn_Click">Off daily advice</Button>
-            <Rectangle x:Name="advice_switch_rect" Grid.Row="3" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
-            <Button x:Name="dark_mode_btn" Grid.Row="4" Style="{StaticResource LightOptionsButton}" Click="dark_mode_btn_Click">Dark mode</Button>
-            <Rectangle x:Name="dark_mode_rect" Grid.Row="4" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
-            <Button x:Name="log_out_btn" Grid.Row="5" Style="{StaticResource LightOptionsButton}" Click="log_out_btn_Click">Log out</Button>
-            <Rectangle x:Name="sign_in_rect" Grid.Row="5" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="notifications_switch_btn" Visibility="Hidden" Grid.Row="2" Style="{StaticResource LightOptionsButton}" Click="notifications_switch_btn_Click">Off notifications</Button>
+            <Rectangle x:Name="notifications_switch_rect" Visibility="Hidden" Grid.Row="2" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="advice_switch_btn" Grid.Row="3" Visibility="Hidden" Style="{StaticResource LightOptionsButton}" Click="advice_switch_btn_Click">Off daily advice</Button>
+            <Rectangle x:Name="advice_switch_rect" Visibility="Hidden" Grid.Row="3" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="dark_mode_btn" Grid.Row="2" Style="{StaticResource LightOptionsButton}" Click="dark_mode_btn_Click">Dark mode</Button>
+            <Rectangle x:Name="dark_mode_rect" Grid.Row="2" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
+            <Button x:Name="log_out_btn" Grid.Row="3" Style="{StaticResource LightOptionsButton}" Click="log_out_btn_Click">Log out</Button>
+            <Rectangle x:Name="sign_in_rect" Grid.Row="3" Style="{StaticResource LightOptionsRectangle}"></Rectangle>
         </Grid>
         <Grid x:Name="DailyAdviceGrid" Visibility="Hidden">
             <Grid.RowDefinitions>

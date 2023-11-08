@@ -21,29 +21,62 @@
             </Grid.RowDefinitions>
 
             <Label Content="Login" HorizontalAlignment="Center"
-       Grid.Row="1" VerticalAlignment="Top" Foreground="DarkOliveGreen" 
+       Grid.Row="0" VerticalAlignment="Bottom" Foreground="DarkOliveGreen" 
        FontSize="42" FontFamily="Verdana" FontWeight="Bold"/>
             <TextBox x:Name="accountMailTextBox" Grid.Row="1" Width="450"
-         Height="60" VerticalAlignment="Bottom" Margin="0 0 0 3" Text="alexandrkalyan009@gmail.com"
-             Foreground="DarkOliveGreen"
+         Height="60" VerticalAlignment="Center" Margin="0 0 0 30" Text="Email"
+             Foreground="DarkOliveGreen" GotFocus="accountMailTextBox_GotFocus" LostFocus="accountMailTextBox_LostFocus"
              FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Rectangle Grid.Row="1" Width="459"
-         Height="67" VerticalAlignment="Bottom" RadiusX="8" RadiusY="8"
-           StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
-            <TextBox x:Name="accountPasswordTextBox" Grid.Row="2" Width="450" Text="123456"
-         Height="60" VerticalAlignment="Center"  Foreground="DarkOliveGreen"
-             FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-             />
-            <Rectangle Grid.Row="2" Width="457"
+         Height="67" VerticalAlignment="Center" RadiusX="8" RadiusY="8"
+           StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 30" IsHitTestVisible="False"/>
+            
+            <Grid Grid.Row="2" x:Name="HidePassword" VerticalAlignment="Top">
+                <PasswordBox x:Name="accountHidePasswordTextBox" Grid.Row="2" Width="450" Password="123456"
+         Height="60" VerticalAlignment="Center" GotFocus="accountHidePasswordTextBox_GotFocus" Foreground="DarkOliveGreen" LostFocus="accountHidePasswordTextBox_LostFocus"
+             FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                <Rectangle Grid.Row="2" Width="457"
          Height="67" VerticalAlignment="Center" RadiusX="8" RadiusY="8"
          StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
-            <Button x:Name="signInBtn" Content="Sign in" Grid.Row="3" VerticalAlignment="Top"
+            </Grid>
+            
+            <Grid Grid.Row="2" x:Name="UnhidePassword" VerticalAlignment="Top" Visibility="Visible">
+                <TextBox x:Name="accountPasswordTextBox" Grid.Row="2" Width="450" Text="Password"
+         Height="60" VerticalAlignment="Center"  Foreground="DarkOliveGreen" GotFocus="accountPasswordTextBox_GotFocus" TextChanged="accountPasswordTextBox_TextChanged" LostFocus="accountPasswordTextBox_LostFocus"
+             FontWeight="Bold" FontFamily="Verdana" FontSize="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                <Rectangle Grid.Row="2" Width="457"
+         Height="67" VerticalAlignment="Center" RadiusX="8" RadiusY="8"
+         StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
+            </Grid>
+            
+            <Button x:Name="ShowPassword" VerticalAlignment="Top" Grid.Row="2" Width="40" Height="40" HorizontalAlignment="Left" Margin="15 14 0 0"
+                    Click="ShowPassword_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/eye_hide.png"/>
+                </Button.Background>
+            </Button>
+            <Rectangle Grid.Row="2" Width="46" 
+            Height="46" VerticalAlignment="Top" RadiusX="8" RadiusY="8"
+            StrokeThickness="4" HorizontalAlignment="Left" Stroke="DarkOliveGreen" Margin="12 11 0 0" IsHitTestVisible="False"/>
+            <TextBox x:Name="confirmCodeTextBox" Grid.Row="2" Width="450" Height="60" Visibility="Hidden"
+                     Margin="0 20 0 3" VerticalAlignment="Bottom" Text="Confirm code"
+             Foreground="DarkOliveGreen" FontWeight="Bold" VerticalContentAlignment="Center" 
+             FontSize="22" FontFamily="Verdana" GotFocus="confirmCodeTextBox_GotFocus" LostFocus="confirmCodeTextBox_LostFocus"/>
+            <Rectangle x:Name="confirmCodeRect" Grid.Row="2" Width="459" Visibility="Hidden"
+                Height="67" VerticalAlignment="Bottom" RadiusX="8" RadiusY="8"
+                StrokeThickness="6" Stroke="DarkOliveGreen" Margin="0 1 0 0" IsHitTestVisible="False"/>
+            <Button x:Name="confirmCodeBtn" Content="Confirm" Visibility="Hidden" Grid.Row="3" VerticalAlignment="Top"
+        Width="100" Height="40" BorderBrush="DarkOliveGreen" BorderThickness="5" 
+        Background="FloralWhite"  FontFamily="Verdana" Foreground="DarkOliveGreen" FontWeight="Bold"
+        FontSize="18" Click="confirmCodeBtn_Click" Margin="0 15"/>
+
+            <Button x:Name="signInBtn" Content="Sign in" Grid.Row="3" VerticalAlignment="Center"
         Width="100" Height="40" BorderBrush="DarkOliveGreen" BorderThickness="5" 
         Background="FloralWhite"  FontFamily="Verdana" Foreground="DarkOliveGreen" FontWeight="Bold"
         FontSize="18" Click="signInBtn_Click"/>
             <Label Grid.Row="3" VerticalAlignment="Center" Content="Don't have an account?" HorizontalContentAlignment="Center"
            Foreground="DarkOliveGreen" FontSize="18" FontFamily="Verdana" FontWeight="Bold" Margin="0 70 0 0"/>
-            <Button x:Name="signUpBtn" Grid.Row="3" VerticalAlignment="Bottom" Content="Sign up" Foreground="DarkOliveGreen" 
+            <Button x:Name="signUpBtn" RenderOptions.BitmapScalingMode="HighQuality" Grid.Row="3" VerticalAlignment="Bottom" Content="Sign up" Foreground="DarkOliveGreen" 
            FontSize="18" FontFamily="Verdana" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" 
             Width="80" Margin="0 0 0 15" MouseEnter="signUpBtn_MouseEnter" MouseLeave="signUpBtn_MouseLeave" Click="signUpBtn_Click"/>
         </Grid>

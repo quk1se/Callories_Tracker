@@ -64,17 +64,17 @@
                  Background="FloralWhite" BorderBrush="DarkOliveGreen" BorderThickness="5" Grid.Column="0" Grid.Row="2"
                  Grid.ColumnSpan="4" Foreground="DarkOliveGreen" FontSize="20" FontWeight="Bold" FontFamily="Verdana"
                  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0">Kalyan Oleksandr</TextBox>
-        <Rectangle Fill="FloralWhite" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="5"
+        <Rectangle x:Name="stats_rectangle" Fill="FloralWhite" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="5"
                    Stroke="DarkOliveGreen" StrokeThickness="5"/>
-        <Label Content="Weight" Style="{StaticResource ChangeWindowLabels }" Grid.Row="3" 
+        <Label x:Name="parameters_weight_label" Content="Weight" Style="{StaticResource ChangeWindowLabels }" Grid.Row="3" 
             HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" />
         <TextBox Text="68" Style="{StaticResource ChangeWindowTextBox }" Grid.Column="3" 
             Grid.Row="3" x:Name="parameters_weight"/>
-        <Label Content="Age" Style="{StaticResource ChangeWindowLabels }" Grid.Row="4" 
+        <Label x:Name="parameters_age_label" Content="Age" Style="{StaticResource ChangeWindowLabels }" Grid.Row="4" 
             HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Text="18" Style="{StaticResource ChangeWindowTextBox }" Grid.Column="4" 
             Grid.Row="4" x:Name="parameters_age"/>
-        <Label Content="Height" Style="{StaticResource ChangeWindowLabels }" Grid.Row="5" 
+        <Label x:Name="parameters_height_label" Content="Height" Style="{StaticResource ChangeWindowLabels }" Grid.Row="5" 
             HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox Text="172" Style="{StaticResource ChangeWindowTextBox }" Grid.Column="5" 
             Grid.Row="5" x:Name="parameters_height"/>

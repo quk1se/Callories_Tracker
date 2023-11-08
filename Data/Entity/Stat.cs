@@ -15,5 +15,6 @@ namespace Callories_Tracker.Data.Entity
         public string? Age { get; set; }
         public string? Height { get; set; }
         public string? Max_Target {  get; set; }
+        public string? Target_Points {  get; set; }
     }
 }

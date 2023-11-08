@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Callories_Tracker.Data
 {
@@ -16,7 +17,8 @@ namespace Callories_Tracker.Data
         public DataContext() : base() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=callories_tracker;Integrated Security=True");
+            string? connection_stroke = App.GetConfiguration("database:stroke");
+            optionsBuilder.UseSqlServer($@"{connection_stroke}");
         }
     }
 }

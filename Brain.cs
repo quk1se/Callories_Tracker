@@ -42,7 +42,7 @@ namespace Callories_Tracker
         public float part_of_target;
         public string no_avatar_path = "D:\\Prog_profile\\Callories_Tracker\\AppStyle\\no_avatar.jpg";
         public string target_path = "D:\\Prog_profile\\Callories_Tracker\\AccountData\\daily_target.txt";
-        public Dictionary<Button,string> achievements;
+        public static Dictionary<Button,string> achievements;
         public List<Button> plus_buttons_list;
         public List<Polygon> triangle_polygons;
         public List<Button> advice_buttons_list;
@@ -53,6 +53,7 @@ namespace Callories_Tracker
         public List<Rectangle> options_rectangle_list;
         public List<Button> profile_buttons_list;
         public List<Rectangle> profile_rectangle_list;
+        public List<Label> profile_statistic_labels;
         public Brain()
         {
             
@@ -380,12 +381,15 @@ namespace Callories_Tracker
                 label.Foreground = Brushes.DarkOliveGreen;
             }
         }
-        public void CheckProfileStyle(Style dark_rect_style, Style light_rect_style, Style dark_btn_style, Style light_btn_style, PlotView pl1, PlotView pl2)
+        public void CheckProfileStyle(Style dark_rect_style, Style light_rect_style, Style dark_btn_style, Style light_btn_style, PlotView pl1, Label label1, Label label2, Grid gr)
         {
             if (dark_mode)
             {
+                label1.Foreground = Brushes.Black;
+                label2.Foreground = Brushes.Black;
+                label2.Background = Brushes.LightGray;
                 pl1.Background = Brushes.LightGray;
-                pl2.Background = Brushes.LightGray;
+                gr.Background = Brushes.LightGray;
                 foreach (var item in profile_rectangle_list)
                 {
                     item.Style = dark_rect_style;
@@ -394,11 +398,18 @@ namespace Callories_Tracker
                 {
                     item.Style = dark_btn_style;
                 }
+                foreach (var item in profile_statistic_labels)
+                {
+                    item.Foreground = Brushes.Black;
+                }
             }
             else if (!dark_mode)
             {
+                label1.Foreground = Brushes.DarkOliveGreen;
                 pl1.Background = Brushes.FloralWhite;
-                pl2.Background = Brushes.FloralWhite;
+                gr.Background = Brushes.FloralWhite;
+                label2.Foreground = Brushes.DarkOliveGreen;
+                label2.Background = Brushes.FloralWhite;
                 foreach (var item in profile_rectangle_list)
                 {
                     item.Style = light_rect_style;
@@ -406,6 +417,10 @@ namespace Callories_Tracker
                 foreach (var item in profile_buttons_list)
                 {
                     item.Style = light_btn_style;
+                }
+                foreach (var item in profile_statistic_labels)
+                {
+                    item.Foreground = Brushes.DarkOliveGreen;
                 }
             }
         }

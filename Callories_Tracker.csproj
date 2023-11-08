@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="advice.jpg" />
+    <None Remove="eye_hide.png" />
     <None Remove="no_avatar.jpg" />
     <None Remove="options.jpg" />
     <None Remove="panel_avatar_icn.jpg" />
@@ -28,8 +29,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="eye_hide.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="AppStyle\achievement.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="email-settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
