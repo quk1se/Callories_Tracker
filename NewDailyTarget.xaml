@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Callories_Tracker"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="New Daily Target" Height="350" Width="350">
+        Title="New Daily Target" Height="350" Width="350" Icon="/icon.ico">
     <Window.Background>
         <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
     </Window.Background>

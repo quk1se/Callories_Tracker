@@ -381,13 +381,16 @@ namespace Callories_Tracker
                 label.Foreground = Brushes.DarkOliveGreen;
             }
         }
-        public void CheckProfileStyle(Style dark_rect_style, Style light_rect_style, Style dark_btn_style, Style light_btn_style, PlotView pl1, Label label1, Label label2, Grid gr)
+        public void CheckProfileStyle(Style dark_rect_style, Style light_rect_style, Style dark_btn_style, Style light_btn_style, PlotView pl1, Rectangle rect1, Label label1, Label label2, Label label3, Grid gr)
         {
             if (dark_mode)
             {
                 label1.Foreground = Brushes.Black;
                 label2.Foreground = Brushes.Black;
                 label2.Background = Brushes.LightGray;
+                label3.Foreground = Brushes.Black;
+                rect1.Stroke = Brushes.Black;
+                rect1.Fill = Brushes.LightGray;
                 pl1.Background = Brushes.LightGray;
                 gr.Background = Brushes.LightGray;
                 foreach (var item in profile_rectangle_list)
@@ -410,6 +413,9 @@ namespace Callories_Tracker
                 gr.Background = Brushes.FloralWhite;
                 label2.Foreground = Brushes.DarkOliveGreen;
                 label2.Background = Brushes.FloralWhite;
+                label3.Foreground = Brushes.DarkOliveGreen;
+                rect1.Stroke = Brushes.DarkOliveGreen;
+                rect1.Fill = Brushes.FloralWhite;
                 foreach (var item in profile_rectangle_list)
                 {
                     item.Style = light_rect_style;

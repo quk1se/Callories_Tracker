@@ -70,8 +70,8 @@ namespace Callories_Tracker
             brain.SetPartsTarget();
             var stats = dataContext.Stats.FirstOrDefault(stats => stats.Account_Id == RegistrationWindow.my_id);
             brain.target_points = Int32.Parse(stats.Target_Points);
-            target_progress.Content = $"{brain.target_points}/{stats.Max_Target}";
-            profile_calories_label.Content = $"Kcal {target_progress.Content}";
+            target_progress.Content = $"{stats.Target_Points}/{stats.Max_Target}";
+            profile_calories_label.Content = $"Kcal {stats.Target_Points}/{stats.Max_Target}";
 
             var model = new PlotModel { Title = "Weight statistic" };
             var series = new LineSeries
@@ -161,29 +161,38 @@ namespace Callories_Tracker
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (clickCount >= 10)
+            Dispatcher.Invoke(() =>
             {
-                var achievUpdate = dataContext.Achievements.FirstOrDefault(achiev => achiev.AccountId == RegistrationWindow.my_id);
-                epilepsy.Content = "Epilepsy";
-                if (Brain.achievements[epilepsy] == "false" && brain.dark_mode)
+                if (clickCount >= 10)
                 {
-                    Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedDark");
-                    epilepsy.Style = dark_complete_achieve_style;
+                    var achievUpdate = dataContext.Achievements.FirstOrDefault(achiev => achiev.AccountId == RegistrationWindow.my_id);
+                    epilepsy.Content = "Epilepsy";
+                    if (Brain.achievements[epilepsy] == "false" && brain.dark_mode)
+                    {
+                        Style dark_complete_achieve_style = (Style)FindResource("AchievementCompletedDark");
+                        epilepsy.Style = dark_complete_achieve_style;
+                    }
+                    else if (Brain.achievements[epilepsy] == "false" && !brain.dark_mode)
+                    {
+                        Style light_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
+                        epilepsy.Style = light_complete_achieve_style;
+                    }
+                    Brain.achievements[epilepsy] = "true";
+                    achievUpdate!.Epilepsy = "true";
+                    dataContext.SaveChanges();
+                    clickCount = 0;
                 }
-                else if (Brain.achievements[epilepsy] == "false" && !brain.dark_mode)
+                if (DateTime.Now.Hour == 12 && DateTime.Now.Minute == 20 && (DateTime.Now.Second >= 0 || DateTime.Now.Second <= 10))
                 {
-                    Style light_complete_achieve_style = (Style)FindResource("AchievementCompletedLight");
-                    epilepsy.Style = light_complete_achieve_style;
+                    MessageBox.Show("its day");
+                    brain.target_points = 0;
+                    var stats = dataContext.Stats.FirstOrDefault(stats => stats.Account_Id == RegistrationWindow.my_id);
+                    stats!.Target_Points = "0";
+                    dataContext.SaveChanges();
+                    target_progress.Content = $"{stats.Target_Points}/{stats.Max_Target}";
+                    profile_calories_label.Content = $"Kcal {stats.Target_Points}/{stats.Max_Target}";
                 }
-                Brain.achievements[epilepsy] = "true";
-                achievUpdate!.Epilepsy = "true";
-                dataContext.SaveChanges();
-                clickCount = 0;
-            }
-            if (DateTime.Now == targetTime)
-            {
-                MessageBox.Show("zhopa");
-            }
+            });
         }
 
         private void weight_diagram_btn_Click(object sender, RoutedEventArgs e)
@@ -211,6 +220,8 @@ namespace Callories_Tracker
 
         private void profile_btn_Click(object sender, RoutedEventArgs e)
         {
+            var stats = dataContext.Stats.FirstOrDefault(stats => stats.Account_Id == RegistrationWindow.my_id);
+            profile_calories_label.Content = $"Kcal {stats.Target_Points}/{Brain.daily_max_target}";
             brain.GridVisibleChanged(ProfileGrid,OptionsGrid,TargetGrid, DailyAdviceGrid, AchievementsGrid, HumanParametersGrid);
             if (brain.human_parameters_visible == true) HumanParametersGrid.Visibility = Visibility.Visible;
             your_name_field.Content = Brain.account_name;
@@ -226,6 +237,7 @@ namespace Callories_Tracker
                 your_avatar.Source = new BitmapImage(new Uri(brain.no_avatar_path, UriKind.RelativeOrAbsolute));
             }
             your_avatar.Stretch = Stretch.UniformToFill;
+
         }
         private void target_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -430,7 +442,7 @@ namespace Callories_Tracker
             brain.CheckAdviceTextStyle(advice_text_rectangle, dark_target_rect_style, light_target_rect_style,advice_text,advice_number);
             brain.CheckAdviceBtnsAndRectsStyle(light_advice_btn_style,dark_advice_btn_style,light_advice_rect_style,dark_advice_rect_style);
             //==============================PROFILE==============================
-            brain.CheckProfileStyle(dark_profile_rect_style, light_profile_rect_style, dark_diagram_btn_style, light_diagram_btn_style, WeightDiagram,your_name_field, CircleDiagram, HumanParametersGrid);
+            brain.CheckProfileStyle(dark_profile_rect_style, light_profile_rect_style, dark_diagram_btn_style, light_diagram_btn_style, WeightDiagram, profile_kcal_rect,your_name_field, CircleDiagram, profile_calories_label, HumanParametersGrid);
             //==============================ACHIEVEMENT==============================
             brain.CheckAchieveStyle(light_complete_achieve_style, dark_complete_achieve_style, light_not_complete_achieve_style, dark_not_complete_achieve_style);
         }

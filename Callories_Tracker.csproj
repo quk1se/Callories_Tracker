@@ -10,10 +10,12 @@
   <ItemGroup>
     <None Remove="advice.jpg" />
     <None Remove="eye_hide.png" />
+    <None Remove="icon.ico" />
     <None Remove="no_avatar.jpg" />
     <None Remove="options.jpg" />
     <None Remove="panel_avatar_icn.jpg" />
     <None Remove="target.jpg" />
+    <None Remove="Views\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +32,8 @@
 
   <ItemGroup>
     <Resource Include="eye_hide.png" />
+    <Resource Include="icon.ico" />
+    <Resource Include="Views\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

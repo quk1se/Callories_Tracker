@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Callories_Tracker"
         xmlns:oxy="http://oxyplot.org/wpf"  
         mc:Ignorable="d"
-        Title="Calories Tracker" Height="800" Width="600" ResizeMode="NoResize">
+        Title="GreenFueL" Height="800" Width="600" ResizeMode="NoResize" Icon="/Views/icon.ico">
     
     <Window.Background>
         <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
@@ -353,9 +353,9 @@
             <Label x:Name="your_name_field" Grid.Column="2" Grid.Row="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="3" Foreground="DarkOliveGreen" FontSize="25" FontWeight="Bold" 
                    FontFamily="Verdana" Margin="0,5,0,0">Kalyan Oleksandr</Label>
 
-            <Rectangle Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="5 20 5 20" Fill="FloralWhite" RadiusX="35" RadiusY="35" Stroke="DarkOliveGreen"
+            <Rectangle x:Name="profile_kcal_rect" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="5 20 5 20" Fill="FloralWhite" RadiusX="35" RadiusY="35" Stroke="DarkOliveGreen"
                        StrokeThickness="4"></Rectangle>
-            <Rectangle Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Margin="5 20 5 20" Fill="FloralWhite" RadiusX="35" RadiusY="35" Stroke="DarkOliveGreen"
+            <Rectangle Visibility="Hidden" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Margin="5 20 5 20" Fill="FloralWhite" RadiusX="35" RadiusY="35" Stroke="DarkOliveGreen"
                         StrokeThickness="4"></Rectangle>
             <Label x:Name="profile_calories_label" Grid.Row="1" Grid.Column="2" Content="Kcal 1200/3000" Grid.ColumnSpan="2" Margin="15 30 20 30" Foreground="DarkOliveGreen"
                    VerticalContentAlignment="Center"  HorizontalContentAlignment="Right" FontFamily="Verdana" FontSize="16" FontWeight="Bold"></Label>
@@ -564,18 +564,18 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Rectangle x:Name="advice_text_rectangle" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2"  Style="{StaticResource TargetRectLight}" RadiusX="10" RadiusY="10"></Rectangle>
-            <FlowDocumentScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="15">
-                <FlowDocument>
+            <Rectangle Visibility="Hidden" x:Name="advice_text_rectangle" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2"  Style="{StaticResource TargetRectLight}" RadiusX="10" RadiusY="10"></Rectangle>
+            <FlowDocumentScrollViewer Visibility="Hidden" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="15">
+                <FlowDocument >
                     <Paragraph x:Name="advice_text" FontSize="24" Foreground="DarkOliveGreen" FontWeight="Bold" FontFamily="Verdana">
                     </Paragraph>
                 </FlowDocument>
             </FlowDocumentScrollViewer>
-            <Button x:Name="previous_advice_btn" Style="{StaticResource LightAdviceButton}" Grid.Column="1" Grid.Row="4" Width="80" Height="80" Content="&lt;" Click="previous_advice_btn_Click" ></Button>
-            <Button x:Name="next_advice_btn" Style="{StaticResource LightAdviceButton}" Grid.Column="4" Grid.Row="4" Width="80" Height="80" Content="&gt;" Click="next_advice_btn_Click" ></Button>
-            <Rectangle x:Name="previous_advice_rect" Style="{StaticResource LightAdviceRect}" Grid.Column="1" Grid.Row="4" ></Rectangle>
-            <Rectangle x:Name="next_advice_rect" Style="{StaticResource LightAdviceRect}" Grid.Column="4" Grid.Row="4" ></Rectangle>
-            <Label x:Name="advice_number" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Foreground="DarkOliveGreen" FontSize="50" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center">1/3</Label>
+            <Button Visibility="Hidden" x:Name="previous_advice_btn" Style="{StaticResource LightAdviceButton}" Grid.Column="1" Grid.Row="4" Width="80" Height="80" Content="&lt;" Click="previous_advice_btn_Click" ></Button>
+            <Button Visibility="Hidden" x:Name="next_advice_btn" Style="{StaticResource LightAdviceButton}" Grid.Column="4" Grid.Row="4" Width="80" Height="80" Content="&gt;" Click="next_advice_btn_Click" ></Button>
+            <Rectangle Visibility="Hidden" x:Name="previous_advice_rect" Style="{StaticResource LightAdviceRect}" Grid.Column="1" Grid.Row="4" ></Rectangle>
+            <Rectangle Visibility="Hidden" x:Name="next_advice_rect" Style="{StaticResource LightAdviceRect}" Grid.Column="4" Grid.Row="4" ></Rectangle>
+            <Label Visibility="Hidden" x:Name="advice_number" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Foreground="DarkOliveGreen" FontSize="50" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center" VerticalAlignment="Center">1/3</Label>
         </Grid>
         <Grid x:Name="AchievementsGrid" Visibility="Hidden">
             <ScrollViewer VerticalAlignment="Top" Height="710" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

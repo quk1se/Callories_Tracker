@@ -183,7 +183,9 @@ namespace Callories_Tracker
                     Height = accountNewHeightTextBox.Text,
                     Age = accountNewAgeTextBox.Text,
                     Max_Target = "3000",
-                    Picture = null
+                    Picture = null,
+                    Target_Points = "0"
+                    
                 };
                 Data.Entity.Achievements achievements = new Achievements
                 {

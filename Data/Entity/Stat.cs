@@ -16,5 +16,8 @@ namespace Callories_Tracker.Data.Entity
         public string? Height { get; set; }
         public string? Max_Target {  get; set; }
         public string? Target_Points {  get; set; }
+        //public string? Fats { get; set; }
+        //public string? Carbohydrates { get; set; }
+        //public string? Proteins {  get; set; }
     }
 }

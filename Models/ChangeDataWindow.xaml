@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Callories_Tracker"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Change account data" Height="600" Width="400">
+        Title="Change account data" Height="600" Width="400" Icon="/icon.ico">
     <Window.Background>
         <ImageBrush Stretch="UniformToFill" ImageSource="D:/Prog_profile/Callories_Tracker/AppStyle/background.jpg"/>
     </Window.Background>

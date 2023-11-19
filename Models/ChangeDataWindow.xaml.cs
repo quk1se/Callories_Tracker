@@ -57,7 +57,7 @@ namespace Callories_Tracker
                 Brain.account_weight = parameters_weight.Text;
                 Brain.account_height = parameters_height.Text;
                 if (my_pict_path_txt != "nulleable")
-                    Brain.picture_path = my_pict_path_txt;
+                Brain.picture_path = my_pict_path_txt;
                 var statsToUpdate = dataContext.Stats.FirstOrDefault(stats => stats.Account_Id == RegistrationWindow.my_id);
                 var accountToUpdate = dataContext.Accounts.FirstOrDefault(stats => stats.Id.ToString() == RegistrationWindow.my_id);
                 var achievUpdate = dataContext.Achievements.FirstOrDefault(achiev => achiev.AccountId == RegistrationWindow.my_id);
